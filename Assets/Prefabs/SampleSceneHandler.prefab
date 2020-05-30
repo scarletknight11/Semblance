@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8442238696295618655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8442238696295618653}
+  - component: {fileID: 8442238696295618652}
+  - component: {fileID: 8442238696295618650}
+  m_Layer: 0
+  m_Name: SampleSceneHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8442238696295618653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8442238696295618655}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 807.3673, y: 349.6197, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8442238696295618652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8442238696295618655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857b1ff6195398644bea1674ccb5064f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sdkType: 1
+  testPhotos:
+  - {fileID: 4900000, guid: 71c7c5c2a95a85644a093b91a03fc823, type: 3}
+  - {fileID: 4900000, guid: e2d5a95c6bb7e28478de9630cd0a5585, type: 3}
+  - {fileID: 4900000, guid: c8cbbd1a5e1dc344a9c6f09a0cb47daf, type: 3}
+  progressText: {fileID: 0}
+  controls:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  generateHaircutButton: {fileID: 0}
+  photoPreview: {fileID: 0}
+  facePipelineToggle: {fileID: 0}
+  headPipelineToggle: {fileID: 0}
+  styledFacePipelineToggle: {fileID: 0}
+  bodyAttachments:
+  - {fileID: 0}
+  body: {fileID: 0}
+  prefabButton: {fileID: 0}
+  positionPanel: {fileID: 0}
+--- !u!114 &8442238696295618650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8442238696295618655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0130b22146890478db17b25b53a3c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionControlsPanel: {fileID: 0}
