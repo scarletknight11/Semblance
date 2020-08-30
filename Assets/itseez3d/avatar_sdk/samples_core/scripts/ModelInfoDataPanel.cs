@@ -18,6 +18,9 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 {
 	public class ModelInfoDataPanel : MonoBehaviour
 	{
+		public GameObject dataPanel;
+		public Button showButton;
+
 		public Text hairColorText;
 		public Text skinColorText;
 		public Text genderText;
@@ -32,8 +35,20 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 		public bool showLandmarks = true;
 		public bool showConfidence = true;
 
+		public void OnShowButtonClick()
+		{
+			dataPanel.SetActive(!dataPanel.activeSelf);
+		}
+
 		public void UpdateData(ModelInfo modelInfo)
 		{
+			if (!ModelInfo.HasPredictedData(modelInfo))
+			{
+				showButton.gameObject.SetActive(false);
+				return;
+			}
+			showButton.gameObject.SetActive(true);
+
 			UpdateColor(hairColorText, modelInfo.hair_color);
 			UpdateColor(skinColorText, modelInfo.skin_color);
 

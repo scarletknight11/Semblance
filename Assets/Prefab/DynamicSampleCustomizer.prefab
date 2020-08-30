@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8266335413159722987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8266335413159722986}
+  - component: {fileID: 8266335413159722988}
+  m_Layer: 0
+  m_Name: DynamicSampleCustomizer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8266335413159722986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8266335413159722987}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 771.39496, y: 372.02945, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8266335413159722988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8266335413159722987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4611a00ffa690654fa047ba4017fe56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Avatar: {fileID: 0}
+  characterSystem: {fileID: 0}
+  converterCustomizer: {fileID: 0}
+  GenericColorList: {fileID: 11400000, guid: dcd91d8cb86512549b228ccf32c88e45, type: 2}
+  genericColorSwatch: {fileID: 21300000, guid: df24b1b2c8514b34aa75ea459233768b, type: 3}
+  genericColorSwatchMetallic: {fileID: 21300000, guid: e104937c2000db14fa56151dcb709a84,
+    type: 3}
+  sharedColorTables:
+  - name: Eyes
+    sharedColorTable: {fileID: 11400000, guid: 279fee251e5d9df4683c58715185be70, type: 2}
+    swatch: {fileID: 0}
+    swatchMetallic: {fileID: 0}
+  - name: Hair
+    sharedColorTable: {fileID: 11400000, guid: 2b19585dfa42d404b87e8e58d8ad7b7f, type: 2}
+    swatch: {fileID: 0}
+    swatchMetallic: {fileID: 0}
+  - name: Skin
+    sharedColorTable: {fileID: 11400000, guid: 293a9ab09ce104c24a17ac539784a376, type: 2}
+    swatch: {fileID: 0}
+    swatchMetallic: {fileID: 0}
+  changeRaceDropdown: {fileID: 0}
+  colorDropdownPrefab: {fileID: 113420, guid: dbad0120152d8354d93eb310ea379ca6, type: 3}
+  wardrobeDrodownPrefab: {fileID: 171742, guid: c5d16501bf636e740a7530c420ad375a,
+    type: 3}
+  raceDropdownPrefab: {fileID: 0}
+  loadableItemPrefab: {fileID: 138556, guid: b7e9525ec426d594db712133ed87e83b, type: 3}
+  cancelLoadItem: {fileID: 0}
+  saveCompleteBut: {fileID: 0}
+  colorDropdownPanel: {fileID: 0}
+  wardrobeDropdownPanel: {fileID: 0}
+  faceEditor: {fileID: 0}
+  bodyEditor: {fileID: 0}
+  limitWardrobeOptions: []
+  hideWardrobeOptions:
+  - Underwear
+  - ToonFemale:Face
+  - ToonMale:Face
+  Orbitor: {fileID: 0}
+  _loadRace: 1
+  _loadDNA: 1
+  _loadWardrobe: 1
+  _loadBodyColors: 1
+  _loadWardrobeColors: 1

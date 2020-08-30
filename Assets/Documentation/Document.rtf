@@ -1,0 +1,150 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf340
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Menlo-Italic;
+}
+{\colortbl;\red255\green255\blue255;\red51\green100\blue164;\red51\green51\blue51;\red0\green150\blue149;
+\red136\green136\blue136;\red245\green125\blue0;}
+\paperw11900\paperh16840\vieww12000\viewh14580\viewkind0
+\deftab720
+\pard\pardeftab720\sl276\slmult1\sa200\qc\partightenfactor0
+
+\f0\b\fs24 \cf0 Voice Recorder\
+\pard\pardeftab720\sl276\slmult1\sa200\partightenfactor0
+\cf0 \
+
+\b0 Audio Recorder for unity is a great plugin to record your own audio and use in game.\
+Sometimes we need our own voice for game but can\'92t do this, therefore, we are releasing a 
+\b VoiceRecorder
+\b0  for you. This is fully optimize and supported for Android, iOS, Windows, MAC. Unity Pro is not require to use this plugin.\
+Below is the Integration and How To Use guide for you.\
+
+\b Integration Guide-\
+
+\b0 1). Import AudioRecorder plugin in your project\
+2). Make sure following files are there:\
+/Assets/Plugins/AudioRecorder.dll\
+/Assets/Example folder\
+/Assets/Documentation folder\
+3). There should be a AudioSource in your scene, if not then follow these steps after selecting Main Camera:\
+
+\b Add Component > Audio > Audio Source\
+
+\i\b0 Note : You can put Audio source on any game object in the scene.\
+
+\i0 4). Integration Done\
+\
+
+\b How to use-\
+
+\b0 1). Create a instance of AudioRecorder class\
+
+\b AudioRecorder  recorder = new AudioRecorder();\
+
+\b0 2). Setup events\
+- OnInit fires when audio recorder initialised.\
+\pard\pardeftab720\partightenfactor0
+
+\f1 \cf2 Recorder\cf3 .onInit += OnInit;\uc0\u8232 
+\f0\b \cf0 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0 \cf4 void\cf3  OnInit(\cf4 bool\cf3  success)\uc0\u8232 
+\f0 \cf0 \{\
+\
+\pard\pardeftab720\sl276\slmult1\sa200\partightenfactor0
+\cf0 \}\
+\
+- 
+\f1 \cf3 OnRecordingFinish fire when recording finished.
+\f0 \cf0 \
+\pard\pardeftab720\partightenfactor0
+
+\f1 \cf2 Recorder\cf3 .onFinish += OnRecordingFinish;\uc0\u8232 
+\f0\b \cf0 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0 \cf4 void\cf3  OnRecordingFinish(\cf2 AudioClip\cf3  clip)\uc0\u8232 \{\u8232 	\cf4 if\cf3 (autoPlay)\uc0\u8232 	\{\u8232 		recorder.PlayAudio (clip, audioSource);\u8232 \u8232 		
+\f2\i \cf5 // or you can use\uc0\u8232 
+\f1\i0 \cf3 		
+\f2\i \cf5 //recorder.PlayRecorded(audioSource);\uc0\u8232 
+\f1\i0 \cf3 	\}\uc0\u8232 \}\
+\
+- OnRecordingSaved fires when recording saved on disk.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 Recorder\cf3 .onSaved += OnRecordingSaved;\uc0\u8232 \
+\pard\pardeftab720\partightenfactor0
+\cf4 void\cf3  OnRecordingSaved(\cf4 string\cf3  path)\uc0\u8232 \{\u8232 	\cf2 Debug\cf3 .Log(\cf6 "File Saved at : "\cf3 +path);\uc0\u8232 	recorder.PlayAudio (path, audioSource); // play recorded audio from path\u8232 \}\u8232 \
+- OnError fires when any errors occurs.\
+\uc0\u8232 \cf2 Recorder\cf3 .onError += OnError;\uc0\u8232 
+\f0 \cf0 \
+
+\f1 \cf4 void\cf3  OnError(\cf4 string\cf3  errMsg)\uc0\u8232 \{\u8232 	\cf2 Debug\cf3 .Log(\cf6 "Error : "\cf3 +errMsg);\uc0\u8232 \}\u8232 
+\f0 \cf0 \
+\
+\pard\pardeftab720\sl276\slmult1\sa200\partightenfactor0
+
+\i \cf0 Use following function to record your audio\
+
+\i0\b 1).
+\b0  
+\b Init
+\b0 () : Initialize audio recorder, must be called before use of any other functions\
+
+\b 2). StartRecording
+\b0 (
+\b isLoop
+\b0 , 
+\b timeInSec
+\b0 ) : Start recording your audio from microphone with default frequency supported by microphone.\
+
+\b 3). StartRecording
+\b0 (
+\b isLoop
+\b0 , 
+\b timeInSec,frequency
+\b0 ) : Start recording your audio from microphone with custom frequency \
+
+\b 4). StopRecording
+\b0 () : Stop Recording\
+
+\b 5). PlayRecorded
+\b0 (
+\b audioSource
+\b0 ) : Play recorded audio, you have pass audio source parameter.\
+
+\b 6). PlayAudio(path, audioSource) : 
+\b0 Play audio from path.\
+
+\b 7). PlayAudio(audioClip, audioSource) : 
+\b0 Play audio clip.\
+
+\b 8). Save (path,audioClip): 
+\b0 Save recorded file to disk.\
+
+\b 9).
+\b0  
+\b Dispose
+\b0 ()  :  Destroy recorded clip or reset everything\
+
+\b 10).
+\b0  
+\b hasRecorded
+\b0  : Property return \'91true\'92 if there is something recorded, otherwise returns \'91false\'92.\
+
+\b 11).
+\b0  
+\b Clip
+\b0  : Property returns recorded clip of type AudioClip.\
+
+\b 12).
+\b0  
+\b IsRecording
+\b0  : Property returns \'91true\'92 if currently recoding is in progress, otherwise returns \'91false\'92.\
+
+\b 13).
+\b0  
+\b IsReady
+\b0  : Property returns \'91true\'92 if successfully Initialized, otherwise returns \'91false\'92.\
+
+\i \
+}

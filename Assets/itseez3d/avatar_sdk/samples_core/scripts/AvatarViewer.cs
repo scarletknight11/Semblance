@@ -36,19 +36,6 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 			public bool useAnimations = true;
 		};
 
-		#region Scene and project dependencies
-
-		// Camera for the scene
-		public Camera sceneCamera;
-
-		// Parent object of the camera
-		public GameObject cameraPosition;
-
-		// Parent object of the camera when it should be moved further
-		public GameObject farCameraPosition;
-
-		#endregion
-
 		#region UI
 
 		public GameObject avatarControls;
@@ -68,8 +55,10 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 		public ItemsSelectingView blendshapesSelectingView;
 		public HaircutsSelectingView haircutsSelectingView;
 		public Button modelInfoButton;
-		public GameObject modelInfoPanel;
+		public ModelInfoDataPanel modelInfoPanel;
 		public GameObject haircutRecoloringPanel;
+
+		public AnimationManager animationManager;
 
 		public RuntimeAnimatorController legacyAnimationsController;
 		public RuntimeAnimatorController mobileAnimationsController;
@@ -99,9 +88,6 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 		// Haircut index of the current avatar, zero for bald head.
 		private int currentHaircut = 0;
 
-		// Positions of the instantiated objects relative to base model.
-		private List<Matrix4x4> deltaMatrixList = new List<Matrix4x4>();
-
 		// AvatarProvider to retrieve head mesh and texture
 		protected IAvatarProvider avatarProvider;
 
@@ -119,18 +105,6 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 
 		private HaircutRecoloring haircutRecoloring = null;
 
-		// names of the animations to play
-		protected List<string> animations = new List<string> {
-			"smile",
-			"blink",
-			"kiss",
-			"puff",
-			"yawning",
-			"fear",
-			"distrust",
-			"chewing",
-			"mouth_left_right",
-		};
 		#endregion
 
 		#region Constants
@@ -173,13 +147,6 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 			private set;
 		}
 
-		// Flag indicates if we need to render several models by using GPU instantiating.
-		public bool IsInstantiatingMode
-		{
-			get;
-			private set;
-		}
-
 		#endregion
 
 		#region Lifecycle
@@ -190,7 +157,6 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 
 			// default values for properties
 			IsUnlitMode = true;
-			IsInstantiatingMode = false;
 
 			// required for transparent hair shader
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN || UNITY_EDITOR
@@ -199,59 +165,9 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 			QualitySettings.antiAliasing = 4;
 #endif
 
-			// initialize positions of the instantiated models
-			var d = 4.2f;
-			for (int i = -3; i <= 3; i++)
-				for (int j = -3; j <= 3; j++)
-				{
-					if (i == 0 && j == 0)
-						continue;
-					var matrix = Matrix4x4.identity;
-					matrix.m03 += i * d;
-					matrix.m23 += j * d;
-					deltaMatrixList.Add(matrix);
-				}
-
 			haircutRecoloring = haircutRecoloringPanel.GetComponentInChildren<HaircutRecoloring>();
 
 			StartCoroutine(InitializeScene());
-		}
-
-		/// <summary>
-		/// Called by Unity on every frame.
-		/// </summary>
-		void Update()
-		{
-			// example on how to cheaply render multiple instances of 3D avatar
-			if (IsInstantiatingMode && headObject != null)
-			{
-				SkinnedMeshRenderer headMeshRenderer = headObject.GetComponent<SkinnedMeshRenderer>();
-				Mesh headMesh = headMeshRenderer.sharedMesh;
-				Material headMaterial = headMeshRenderer.material;
-				Mesh haircutMesh = null;
-				Material haircutMaterial = null;
-				if (haircutObject != null)
-				{
-					haircutMesh = haircutObject.GetComponent<MeshFilter>().mesh;
-					haircutMaterial = haircutObject.GetComponent<MeshRenderer>().material;
-				}
-
-				foreach (Matrix4x4 deltaMatrix in deltaMatrixList)
-				{
-					Matrix4x4 headMatrix = headObject.transform.localToWorldMatrix;
-					headMatrix.m03 += deltaMatrix.m03;
-					headMatrix.m23 += deltaMatrix.m23;
-					Graphics.DrawMesh(headMesh, headMatrix, headMaterial, 0);
-
-					if (haircutMesh != null)
-					{
-						Matrix4x4 haircutMatrix = haircutObject.transform.localToWorldMatrix;
-						haircutMatrix.m03 += deltaMatrix.m03;
-						haircutMatrix.m23 += deltaMatrix.m23;
-						Graphics.DrawMesh(haircutMesh, haircutMatrix, haircutMaterial, 0);
-					}
-				}
-			}
 		}
 
 		#endregion
@@ -328,24 +244,6 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 				haircutMeshRenderer.material = ShadersUtils.ConfigureHaircutMaterial(haircutMeshRenderer.material, GetCurrentHaircutName(), !IsUnlitMode);
 				haircutRecoloring.UpdateHaircutMaterial(haircutMeshRenderer.material);
 			}
-		}
-
-		public void OnInstantiateCheckboxChanged(bool isChecked)
-		{
-			IsInstantiatingMode = isChecked;
-			GetComponent<AnimationManager>().animationsPanel.SetActive(!IsInstantiatingMode);
-
-			if (isChecked)
-				sceneCamera.transform.SetParent(farCameraPosition.transform);
-			else
-				sceneCamera.transform.SetParent(cameraPosition.transform);
-			sceneCamera.transform.localPosition = Vector3.zero;
-			sceneCamera.transform.localRotation = Quaternion.identity;
-		}
-
-		public void OnModelInfoButtonClick()
-		{
-			modelInfoPanel.gameObject.SetActive(!modelInfoPanel.gameObject.activeSelf);
 		}
 
 		public void ConvertAvatarToObjFormat()
@@ -526,7 +424,8 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 
 					if (useAnimations)
 					{
-						GetComponent<AnimationManager>().CreateAnimator(headObject, animations, GetAnimationsController(pipelineType));
+						animationManager.animatorController = GetAnimationsController(pipelineType);
+						animationManager.CreateAnimator(headObject);
 					}
 					else
 					{
@@ -583,12 +482,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 			avatarControls.SetActive(true);
 
 			ModelInfo modelInfo = CoreTools.GetAvatarModelInfo(currentAvatarCode);
-			if (ModelInfo.HasPredictedData(modelInfo))
-			{
-				modelInfoButton.gameObject.SetActive(true);
-				var modelInfoDataPanel = modelInfoPanel.GetComponentInChildren<ModelInfoDataPanel>();
-				modelInfoDataPanel.UpdateData(modelInfo);
-			}
+			modelInfoPanel.UpdateData(modelInfo);
 		}
 
 		private int findCurrentHaircut(List<string> haircutsList, string v)
@@ -768,7 +662,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 
 		private RuntimeAnimatorController GetAnimationsController(PipelineType pipelineType)
 		{
-			if (pipelineType == PipelineType.BUST_2_0 || pipelineType == PipelineType.HEAD_2_0 || pipelineType == PipelineType.HEAD)
+			if (pipelineType == PipelineType.HEAD_2_0_BUST_MOBILE || pipelineType == PipelineType.HEAD_2_0_HEAD_MOBILE || pipelineType == PipelineType.HEAD_1_2)
 				return mobileAnimationsController;
 			
 			return legacyAnimationsController;

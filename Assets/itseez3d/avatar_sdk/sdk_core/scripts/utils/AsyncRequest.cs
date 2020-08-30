@@ -29,6 +29,19 @@ namespace ItSeez3D.AvatarSdk.Core
 		protected object mutex = new object ();
 
 		/// <summary>
+		/// Creates a completed AsyncRequest
+		/// </summary>
+		public static AsyncRequest CompletedRequest
+		{
+			get
+			{
+				AsyncRequest asyncRequest = new AsyncRequest();
+				asyncRequest.IsDone = true;
+				return asyncRequest;
+			}
+		}
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="ItSeez3D.AsyncRequest"/> class.
 		/// </summary>
 		/// <param name="initialState">Initial value to be returned by State property. Usually a name of the

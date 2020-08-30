@@ -34,6 +34,8 @@ namespace ItSeez3D.AvatarSdkSamples.Core.Editor
 			SampleScene.CLOUD_05_PARAMETERS,
 			SampleScene.CLOUD_06_CARTOONISH_AVATAR,
 			SampleScene.CLOUD_07_WEBGL,
+			SampleScene.CLOUD_08_FULLBODY_LEGACY,
+			SampleScene.CLOUD_09_MULTIPLAYER,
 			SampleScene.AVATAR_VIEWER
 		};
 

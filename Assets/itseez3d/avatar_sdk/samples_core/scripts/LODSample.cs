@@ -49,7 +49,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 
 		protected List<Toggle> toggles = new List<Toggle>();
 
-		HashSet<PipelineType> setOfHead2Pipelines = new HashSet<PipelineType> { PipelineType.BUST_2_0, PipelineType.HEAD_2_0 };
+		HashSet<PipelineType> setOfHead2Pipelines = new HashSet<PipelineType> { PipelineType.HEAD_2_0_BUST_MOBILE, PipelineType.HEAD_2_0_HEAD_MOBILE };
 
 		#region GettingStartedSample overrided methods
 		public override void OnPipelineTypeToggleChanged(PipelineType newType)
@@ -65,7 +65,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 		}
 		protected override void Start()
 		{
-			selectedPipelineType = PipelineType.HEAD_2_0;
+			selectedPipelineType = PipelineType.HEAD_2_0_HEAD_MOBILE;
 			Debug.Log("LOD functionality is currently supported for head/mobile subtype only");
 			base.Start();
 		}
@@ -79,7 +79,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 				case PipelineType.FACE:
 					numberOfToggles = 9;
 					break;
-				case PipelineType.BUST_2_0:
+				case PipelineType.HEAD_2_0_BUST_MOBILE:
 					numberOfToggles = 0;
 					break;
 				default:
@@ -100,7 +100,8 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 			if (parametersRequest.IsError)
 				yield break;
 
-			computationParameters.CopyFrom(parametersRequest.Result);
+			computationParameters.blendshapes = parametersRequest.Result.blendshapes;
+			computationParameters.avatarModifications = parametersRequest.Result.avatarModifications;
 
 			if(setOfHead2Pipelines.Contains(pipelineType))
 			{
@@ -123,11 +124,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 				{
 					computationParameters.avatarModifications.textureSize.Value = additionalParamsModel.ModelTextureSize;
 				}
-				computationParameters.haircuts.Values.RemoveAll(v => !v.FullName.Contains("generated"));
-			}
-			else
-			{
-				computationParameters.haircuts.Values.Clear();
+				computationParameters.haircuts.AddValue("base\\generated");
 			}
 		}
 

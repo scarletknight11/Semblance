@@ -37,6 +37,7 @@ namespace ItSeez3D.AvatarSdk.Core
 		PHOTO,
 		THUMBNAIL,
 		MESH_PLY,
+		MESH_GLTF,
 		MESH_ZIP,
 		TEXTURE,
 		HAIRCUT_POINT_CLOUD_PLY,
@@ -48,7 +49,7 @@ namespace ItSeez3D.AvatarSdk.Core
 		BLENDSHAPES_FBX_ZIP,
 		BLENDSHAPES_PLY_ZIP,
 		PARAMETERS_JSON,
-		PIPELINE_INFO, // obsolete, will be removed in the next releases
+		PIPELINE_INFO,
 		MODEL_JSON,
 		UMA_BONES
 	}
@@ -125,7 +126,8 @@ namespace ItSeez3D.AvatarSdk.Core
 		private Dictionary<AvatarFile, string> avatarFiles = new Dictionary<AvatarFile, string> () {
 			{ AvatarFile.PHOTO, "photo.jpg" },
 			{ AvatarFile.THUMBNAIL, "thumbnail.jpg" },
-			{ AvatarFile.MESH_PLY, "model.ply" },  // corresponds to file name inside zip
+			{ AvatarFile.MESH_PLY, "model.ply" },
+			{ AvatarFile.MESH_GLTF, "model.gltf" },
 			{ AvatarFile.MESH_ZIP, "model.zip" },
 			{ AvatarFile.TEXTURE, "model.jpg" },
 			{ AvatarFile.HAIRCUT_POINT_CLOUD_PLY, "cloud_{0}.ply" },

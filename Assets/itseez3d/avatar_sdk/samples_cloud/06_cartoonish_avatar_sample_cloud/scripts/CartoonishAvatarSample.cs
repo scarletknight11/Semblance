@@ -48,10 +48,8 @@ namespace ItSeez3D.AvatarSdkSamples.Cloud
 		}
 
 		#region base overrided methods
-		protected override IEnumerator Initialize()
+		protected override IEnumerator CheckAvailablePipelines()
 		{
-			yield return base.Initialize();
-
 			// Cartoonish avatars are available starting from the INDIE plan. Need to verify it.
 			SetControlsInteractable(false);
 			var cartoonishPipelineAvailabilityRequest = avatarProvider.IsPipelineSupportedAsync(selectedPipelineType);
@@ -80,10 +78,11 @@ namespace ItSeez3D.AvatarSdkSamples.Cloud
 			if (parametersRequest.IsError)
 				yield break;
 
-			computationParameters.CopyFrom(parametersRequest.Result);
+			computationParameters.haircuts = parametersRequest.Result.haircuts;
+			computationParameters.additionalTextures = parametersRequest.Result.additionalTextures;
+			computationParameters.avatarModifications = parametersRequest.Result.avatarModifications;
+			computationParameters.shapeModifications = parametersRequest.Result.shapeModifications;
 
-			computationParameters.blendshapes.Values.Clear();
- 
 			//cartoonishV03 paramater specifies the cartoonish level
 			computationParameters.shapeModifications.cartoonishV03.Value = cartoonishValue;
 
@@ -123,7 +122,7 @@ namespace ItSeez3D.AvatarSdkSamples.Cloud
 			currentTextureNameText.text = availableTextures[currentTextureIndex];
 			texturesSelectingView.InitItems(availableTextures);
 
-			var avatarHeadRequest = avatarProvider.GetHeadMeshAsync(currentAvatarCode, false, 0, availableTextures[currentTextureIndex]);
+			var avatarHeadRequest = avatarProvider.GetHeadMeshAsync(currentAvatarCode, false, 0, MeshFormat.PLY, availableTextures[currentTextureIndex]);
 			yield return Await(avatarHeadRequest);
 			TexturedMesh headTexturedMesh = avatarHeadRequest.Result;
 

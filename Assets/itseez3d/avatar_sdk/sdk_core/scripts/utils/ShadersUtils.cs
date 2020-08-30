@@ -31,7 +31,8 @@ namespace ItSeez3D.AvatarSdk.Core
 			"plus/balding",
 			"plus/short_slick",
 			"base/male_makehuman_short02",
-			"facegen/facegen_balding"
+			"facegen/facegen_balding",
+			"plus/bob_parted"
 		};
 
 		private static List<string> haircutsWithCulling = new List<string>()

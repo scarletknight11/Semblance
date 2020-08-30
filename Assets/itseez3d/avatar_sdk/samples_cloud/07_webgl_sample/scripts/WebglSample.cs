@@ -58,7 +58,7 @@ namespace ItSeez3D.AvatarSdkSamples.Cloud
 
 		private Connection connection = null;
 
-		private PipelineType pipelineType = PipelineType.HEAD;
+		private PipelineType pipelineType = PipelineType.HEAD_1_2;
 
 		// these variables should be static to maintain the previous state of the scene
 		// in case the scene was reloaded
@@ -144,7 +144,7 @@ namespace ItSeez3D.AvatarSdkSamples.Cloud
 			if (createdAvatar != null)
 			{
 				UpdateSelectedImage(selectedImageBytes);
-				UpdateAvatarState(avatarState, PipelineType.HEAD);
+				UpdateAvatarState(avatarState, PipelineType.HEAD_1_2);
 			}
 			else
 			{
@@ -322,19 +322,13 @@ namespace ItSeez3D.AvatarSdkSamples.Cloud
 				request.SetError(msg);
 				yield break;
 			}
-			ComputationParameters computationParameters = allParametersRequest.Result;
+			ComputationParameters computationParameters = ComputationParameters.Empty;
+			computationParameters.haircuts = allParametersRequest.Result.haircuts;
 			computationParameters.blendshapes = defaultParametersRequest.Result.blendshapes;
-			computationParameters.modelInfo = allParametersRequest.Result.modelInfo;
-			computationParameters.modelInfo.SetAll(true);
-			if(computationParameters.modelInfo.predictHaircut.IsAvailable)
-			{
-				computationParameters.modelInfo.predictHaircut.Value = true;
-			}
-			if (computationParameters.modelInfo.hairColor.IsAvailable)
-			{
-				computationParameters.modelInfo.hairColor.Value = true;
-			}
-			
+			computationParameters.avatarModifications = allParametersRequest.Result.avatarModifications;
+			computationParameters.avatarModifications.removeSmile.Value = true;
+			computationParameters.avatarModifications.removeGlasses.Value = true;
+			computationParameters.avatarModifications.enhanceLighting.Value = true;
 
 			var createAvatar = connection.CreateAvatarWithPhotoAsync("test_avatar", null, selectedImageBytes, false, pipelineType, computationParameters);
 			yield return Await(createAvatar, pipelineType);
@@ -515,7 +509,7 @@ namespace ItSeez3D.AvatarSdkSamples.Cloud
 		{
 			Debug.LogFormat("Pipeline: {0}, state: {1}", pipelineType, state);
 
-			if (pipelineType == PipelineType.HEAD_2_0)
+			if (pipelineType == PipelineType.HEAD_2_0_HEAD_MOBILE)
 			{
 				// Don't display avatar status of animated face pipeline
 				// It is being calculated in background
@@ -554,12 +548,12 @@ namespace ItSeez3D.AvatarSdkSamples.Cloud
 				if (r.IsError)
 				{
 					Debug.LogError(r.ErrorMessage);
-					if (pipelineType == PipelineType.HEAD)
+					if (pipelineType == PipelineType.HEAD_1_2)
 						progressText.text = r.ErrorMessage;
 					yield break;
 				}
 
-				if (pipelineType == PipelineType.HEAD)
+				if (pipelineType == PipelineType.HEAD_1_2)
 				{
 					int subrequestLevel = 0;
 					var progress = new List<string>();
@@ -575,7 +569,7 @@ namespace ItSeez3D.AvatarSdkSamples.Cloud
 				}
 			}
 
-			if (pipelineType == PipelineType.HEAD)
+			if (pipelineType == PipelineType.HEAD_1_2)
 				progressText.text = string.Empty;
 		}
 

@@ -20,7 +20,7 @@ namespace ItSeez3D.AvatarSdk.Core
 	/// </summary>
 	public class RotateByMouse : MonoBehaviour
 	{
-		private Vector2 lastPosition;
+		protected Vector2 lastPosition;
 
 		void Update ()
 		{
@@ -52,7 +52,7 @@ namespace ItSeez3D.AvatarSdk.Core
 			}
 		}
 
-		private bool IsPointerOverUIObject()
+		protected bool IsPointerOverUIObject()
 		{
 			PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current)
 			{

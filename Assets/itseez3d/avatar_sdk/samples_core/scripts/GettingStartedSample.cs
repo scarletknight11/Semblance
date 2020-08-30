@@ -30,7 +30,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 		public SdkType sdkType;
 
 		// Test data
-		public TextAsset[] testPhotos;
+		public SamplePhotoSupplier photoSupplier;
 
 		#region UI
 		public Text progressText;
@@ -149,9 +149,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 		public void GenerateRandomAvatar()
 		{
 			// Load random sample photo from the assets. Here you may replace it with your own photo.
-			var testPhotoIdx = UnityEngine.Random.Range(0, testPhotos.Length);
-			var testPhoto = testPhotos[testPhotoIdx];
-			StartCoroutine(GenerateAvatarFunc(testPhoto.bytes));
+			StartCoroutine(GenerateAvatarFunc(photoSupplier.GetRandomPhoto()));
 		}
 
 		/// <summary>
@@ -205,7 +203,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 			yield return StartCoroutine(GenerateAndDisplayHead(photoBytes, selectedPipelineType));
 			SetControlsInteractable(true);
 			if (generateHaircutButton != null)
-				generateHaircutButton.gameObject.SetActive(selectedPipelineType == PipelineType.HEAD_2_0);
+				generateHaircutButton.gameObject.SetActive(selectedPipelineType == PipelineType.HEAD_2_0_HEAD_MOBILE);
 		}
 
 		/// <summary>
@@ -288,7 +286,8 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 			// Choose default set of parameters
 			var parametersRequest = avatarProvider.GetParametersAsync(ComputationParametersSubset.DEFAULT, pipelineType);
 			yield return Await(parametersRequest);
-			computationParameters.CopyFrom(parametersRequest.Result);
+			computationParameters.haircuts = parametersRequest.Result.haircuts;
+			computationParameters.blendshapes = parametersRequest.Result.blendshapes;
 		}
 
 		/// <summary>

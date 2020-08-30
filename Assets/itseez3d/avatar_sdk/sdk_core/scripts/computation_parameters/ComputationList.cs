@@ -112,6 +112,11 @@ namespace ItSeez3D.AvatarSdk.Core
 			}
 		}
 
+		public void AddValue(string fullName)
+		{
+			values.Add(new ComputationListValue(fullName));
+		}
+
 		public JSONNode ToJson(bool useGroupName = true)
 		{
 			if (useGroupName)

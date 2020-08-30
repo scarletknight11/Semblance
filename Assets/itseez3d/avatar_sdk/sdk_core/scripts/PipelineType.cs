@@ -33,17 +33,17 @@ namespace ItSeez3D.AvatarSdk.Core
 		/// Pipeline that generates head with hair and shoulders (supports blendshapes)
 		/// "head_1.2" pipeline, "base/mobile" pipeline subtype
 		/// </summary>
-		HEAD,
+		HEAD_1_2,
 
 		/// <summary>
 		/// "head_2.0" pipeline, "head/mobile" pipeline subtype
 		/// </summary>
-		HEAD_2_0,
+		HEAD_2_0_HEAD_MOBILE,
 
 		/// <summary>
 		/// "head_2.0" pipeline, "bust/mobile" pipeline subtype
 		/// </summary>
-		BUST_2_0,
+		HEAD_2_0_BUST_MOBILE,
 
 		/// <summary>
 		/// "head_2.0" pipeline, "uma2/male" pipeline subtype
@@ -53,7 +53,12 @@ namespace ItSeez3D.AvatarSdk.Core
 		/// <summary>
 		/// "head_2.0" pipeline, "uma2/female" pipeline subtype
 		/// </summary>
-		UMA_FEMALE
+		UMA_FEMALE,
+
+		/// <summary>
+		/// "body_0.1" pipeline, "body/mobile" pipeline subtype
+		/// </summary>
+		FULLBODY
 	}
 
 	/// <summary>
@@ -64,6 +69,14 @@ namespace ItSeez3D.AvatarSdk.Core
 		public static PipelineTypeTraits Traits(this PipelineType pipelineType)
 		{
 			return (PipelineTypeTraits)pipelineType;
+		}
+
+		/// <summary>
+		/// Hash function for storing parameters of different pipelines in cache
+		/// </summary>
+		public static string ParametersSubsetHash(this PipelineType pipelineType, ComputationParametersSubset parametersSubset)
+		{
+			return string.Format("{0} {1}", parametersSubset.ToString(), pipelineType.ToString());
 		}
 	}
 
@@ -132,7 +145,15 @@ namespace ItSeez3D.AvatarSdk.Core
 		public T GetTraitsFromPipelineName(string pipelineName, string pipelineSubtypeName)
 		{
 			T result = null;
-			result = TraitsDictionary.FirstOrDefault(element => element.Value.PipelineTypeName.Equals(pipelineName) && element.Value.PipelineSubtypeName.Equals(pipelineSubtypeName)).Value;
+			foreach(var pair in TraitsDictionary)
+			{
+				T traits = pair.Value;
+				if (traits.IsSuppoted && traits.PipelineTypeName.Equals(pipelineName) && traits.PipelineSubtypeName.Equals(pipelineSubtypeName))
+				{
+					result = traits;
+					break;
+				}
+			}
 			if (result == null)
 				Debug.LogErrorFormat("Unable to get PipelineTypeTraits for pipeline: {0}, pipelineSubtype: {1}", pipelineName, pipelineSubtypeName);
 			return result;
@@ -140,10 +161,8 @@ namespace ItSeez3D.AvatarSdk.Core
 
 		public T GetTraitsFromAvatarCode(string avatarCode)
 		{
-			ModelInfo modelInfo = CoreTools.GetAvatarModelInfo(avatarCode);
-			if (modelInfo == null)
-				return null;
-			return GetTraitsFromPipelineName(modelInfo.pipeline, modelInfo.pipeline_subtype);
+			PipelineType pipelineType = CoreTools.LoadPipelineType(avatarCode);
+			return TraitsDictionary[pipelineType];
 		}
 
 		public bool IsTypeSupported(PipelineType pipelineType)
@@ -172,10 +191,14 @@ namespace ItSeez3D.AvatarSdk.Core
 		public abstract bool HaircutsSupported { get; }
 		public abstract string DisplayName { get; }
 		public abstract PipelineType Type { get; }
+
 		public virtual bool IsPointcloudApplicableToHaircut(string haircutId)
 		{
 			return true;
 		}
+
+		public virtual bool IsSuppoted { get { return PipelineTraitsFactory.Instance.IsTypeSupported(Type); } }
+
 		public static explicit operator PipelineTypeTraits(PipelineType pipelineType)
 		{
 			return PipelineTraitsFactory.Instance.GetTraits(pipelineType);

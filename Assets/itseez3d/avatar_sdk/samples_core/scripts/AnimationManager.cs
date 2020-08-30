@@ -22,20 +22,20 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 	{
 		#region UI
 
-		public GameObject animationsPanel;
 		public Text currentAnimationText;
+
+		public RuntimeAnimatorController animatorController;
+
+		public string[] animations;
 
 		#endregion
 
 		// animations-related data
 		private Animator animator = null;
-		private List<string> animations = new List<string>();
 		private int currentAnimationIdx = 0;
 
-		public void CreateAnimator (GameObject obj, List<string> playingAnimations, RuntimeAnimatorController animatorController)
+		public void CreateAnimator (GameObject obj)
 		{
-			animations = playingAnimations;
-
 			ChangeCurrentAnimation(0);
 
 			animator = obj.AddComponent<Animator> ();
@@ -52,8 +52,8 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 		{
 			var newIdx = currentAnimationIdx + delta;
 			if (newIdx < 0)
-				newIdx = animations.Count - 1;
-			if (newIdx >= animations.Count)
+				newIdx = animations.Length - 1;
+			if (newIdx >= animations.Length)
 				newIdx = 0;
 
 			currentAnimationIdx = newIdx;

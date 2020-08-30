@@ -81,8 +81,8 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 		// label that displays current page number
 		public Text currentPageText;
 
-		// Test data, an array of jpeg-encoded sample selfies
-		public TextAsset[] testPhotos;
+		// object that provides test photos
+		public SamplePhotoSupplier photoSupplier;
 
 		// scripts that allows to open image from the file system
 		public FileBrowser fileBrowser = null;
@@ -407,13 +407,16 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 		{
 			PipelineType pipeline = pipelineType;
 			
-			// Choose default set of parameters
 			var parametersRequest = avatarProvider.GetParametersAsync(ComputationParametersSubset.ALL, pipelineType);
 			yield return parametersRequest;
 			if (parametersRequest.IsError)
 				yield break;
 
-			var initializeAvatar = avatarProvider.InitializeAvatarAsync(photoBytes, "name", null, pipeline, parametersRequest.Result);
+			ComputationParameters computationParameters = ComputationParameters.Empty;
+			computationParameters.haircuts = parametersRequest.Result.haircuts;
+			computationParameters.blendshapes = parametersRequest.Result.blendshapes;
+
+			var initializeAvatar = avatarProvider.InitializeAvatarAsync(photoBytes, "name", null, pipeline, computationParameters);
 			yield return Await(initializeAvatar, null);
 
 			string avatarCode = initializeAvatar.Result;
@@ -450,9 +453,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 		/// </summary>
 		public void OnGenerateFromRandomPhoto()
 		{
-			var testPhotoIdx = UnityEngine.Random.Range(0, testPhotos.Length);
-			var testPhoto = testPhotos[testPhotoIdx];
-			StartCoroutine(CreateNewAvatar(testPhoto.bytes));
+			StartCoroutine(CreateNewAvatar(photoSupplier.GetRandomPhoto()));
 		}
 
 		/// <summary>

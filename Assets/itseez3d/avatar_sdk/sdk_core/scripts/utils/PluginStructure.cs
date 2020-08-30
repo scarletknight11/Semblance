@@ -35,13 +35,15 @@ namespace ItSeez3D.AvatarSdk.Core
 		CLOUD_05_PARAMETERS,
 		CLOUD_06_CARTOONISH_AVATAR,
 		CLOUD_07_WEBGL,
+		CLOUD_08_FULLBODY_LEGACY,
+		CLOUD_09_MULTIPLAYER,
 		OFFLINE_00_ALL_SAMPLES,
 		OFFLINE_01_GETTING_STARTED,
 		OFFLINE_02_GALLERY,
 		OFFLINE_03_FULLBODY,
 		OFFLINE_04_LOD,
 		OFFLINE_05_PARAMETERS,
-		AVATAR_VIEWER
+		AVATAR_VIEWER,
 	}
 
 
@@ -75,6 +77,8 @@ namespace ItSeez3D.AvatarSdk.Core
 			{ SampleScene.CLOUD_05_PARAMETERS, "itseez3d/avatar_sdk/samples_cloud/05_parameters_sample_cloud/scenes/05_parameters_sample_cloud.unity" },
 			{ SampleScene.CLOUD_06_CARTOONISH_AVATAR, "itseez3d/avatar_sdk/samples_cloud/06_cartoonish_avatar_sample_cloud/scenes/06_cartoonish_avatar_sample_cloud.unity" },
 			{ SampleScene.CLOUD_07_WEBGL, "itseez3d/avatar_sdk/samples_cloud/07_webgl_sample/scenes/07_webgl_sample.unity" },
+			{ SampleScene.CLOUD_08_FULLBODY_LEGACY, "itseez3d/avatar_sdk/samples_cloud/08_fullbody_legacy_sample_cloud/scenes/08_fullbody_legacy_sample_cloud.unity" },
+			{ SampleScene.CLOUD_09_MULTIPLAYER, "itseez3d/avatar_sdk/samples_cloud/09_multiplayer_sample_cloud/scenes/09_multiplayer_sample_cloud.unity" },
 			{ SampleScene.OFFLINE_00_ALL_SAMPLES, "itseez3d/avatar_sdk/samples_offline/00_all_samples_offline/scenes/00_all_samples_offline.unity" },
 			{ SampleScene.OFFLINE_01_GETTING_STARTED, "itseez3d/avatar_sdk/samples_offline/01_getting_started_sample_offline/scenes/01_getting_started_sample_offline.unity" },
 			{ SampleScene.OFFLINE_02_GALLERY, "itseez3d/avatar_sdk/samples_offline/02_gallery_sample_offline/scenes/02_gallery_sample_offline.unity" },

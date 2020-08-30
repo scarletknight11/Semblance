@@ -814,11 +814,12 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		/// </summary>
 		/// <param name="levelOfDetails">Level of mesh details. 0 - highest resolution, 7 - lowest resolution</param>
 		/// <returns></returns>
-		public virtual AsyncWebRequest<byte[]> DownloadMeshZipAsync(AvatarData avatar, int levelOfDetails = 0)
+		public virtual AsyncWebRequest<byte[]> DownloadMeshZipAsync(AvatarData avatar, int levelOfDetails = 0, MeshFormat format = MeshFormat.PLY)
 		{
 			var paramsDictionary = new Dictionary<string, string>()
 			{
-				{ "lod", levelOfDetails.ToString() }
+				{ "lod", levelOfDetails.ToString() },
+				{ "fmt", format.MeshFormatToStr() }
 			};
 			var url = UrlWithParams(avatar.mesh, paramsDictionary);
 			var r = AvatarDataRequestAsync(url);
@@ -910,9 +911,9 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		/// </summary>
 		/// <param name="format">Format of blendshapes inside the zip file. Use BIN if you don't know which one to choose.</param>
 		/// <param name="levelOfDetails">Level of mesh details. 0 - highest resolution, 7 - lowest resolution</param>
-		public virtual AsyncWebRequest<byte[]> DownloadBlendshapesZipAsync(AvatarData avatar, BlendshapesFormat format = BlendshapesFormat.BIN, int levelOfDetails = 0)
+		public virtual AsyncWebRequest<byte[]> DownloadBlendshapesZipAsync(AvatarData avatar, MeshFormat format = MeshFormat.BIN, int levelOfDetails = 0)
 		{
-			string url = string.Format("{0}?fmt={1}&lod={2}", avatar.blendshapes, format.BlendshapesFormatToStr(), levelOfDetails);
+			string url = string.Format("{0}?fmt={1}&lod={2}", avatar.blendshapes, format.MeshFormatToStr(), levelOfDetails);
 			var r = AvatarDataRequestAsync(url);
 			r.State = AvatarSdkMgr.Str(Strings.DownloadingBlendshapes);
 			return r;

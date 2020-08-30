@@ -19,6 +19,7 @@ namespace ItSeez3D.AvatarSdk.Core
 		public string MeshPly { get; set; }
 		public string MeshZip { get; set; }
 		public string Texture { get; set; }
+		public string CommonTexture { get; set; }
 		public string Preview { get; set; }
 		public string ShortId { get; set; }
 		public string FullId { get; set; }

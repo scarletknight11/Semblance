@@ -20,67 +20,14 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 {
 	public class ParametersSample : GettingStartedSample
 	{
-		#region UI elements
-		public GameObject haircutsPanel;
-		public GameObject blendshapesPanel;
-		public GameObject modelInfoPanel;
-		public GameObject avatarModificationsPanel;
-		public GameObject shapeModificationsPanel;
-		public GameObject additionalTexturesPanel;
+		public ParametersConfigurationPanel parametersPanel;
 
-		public Button haircutsButton;
-		public Button blendshapesButton;
-		public Button modelInfoButton;
-		public Button avatarModificationsButton;
-		public Button shapeModificationsButton;
-		public Button additionalTexturesButton;		
-
-		public ItemsSelectingView haircutsSelectingView;
-		public ItemsSelectingView blendshapesSelectingView;
-		public ModelInfoParametersPanel modelInfoParametersPanel;
-		public AvatarModificationsParametersPanel avatarModificationsParametersPanel;
-		public ShapeModificationsParametersPanel shapeModificationsParametersPanel;
-		public ItemsSelectingView additionalTexturesSelectingView;
-		#endregion
-
-		#region private members
-		private List<GameObject> panels = null;
-		#endregion
-
-
-		#region public methods
 		public override void OnPipelineTypeToggleChanged(PipelineType pipelineType)
 		{
 			base.OnPipelineTypeToggleChanged(pipelineType);
 
 			if (avatarProvider != null && avatarProvider.IsInitialized)
 				StartCoroutine(UpdateAvatarParameters());
-		}
-		#endregion
-
-		#region protected methods
-		protected override void Start()
-		{
-			panels = new List<GameObject>()
-			{
-				haircutsPanel,
-				blendshapesPanel,
-				modelInfoPanel,
-				avatarModificationsPanel,
-				additionalTexturesPanel
-			};
-			if (shapeModificationsPanel != null)
-				panels.Add(shapeModificationsPanel);
-
-			base.Start();
-
-			haircutsButton.onClick.AddListener(() => OnShowPanelButtonClick(haircutsPanel));
-			blendshapesButton.onClick.AddListener(() => OnShowPanelButtonClick(blendshapesPanel));
-			modelInfoButton.onClick.AddListener(() => OnShowPanelButtonClick(modelInfoPanel));
-			avatarModificationsButton.onClick.AddListener(() => OnShowPanelButtonClick(avatarModificationsPanel));
-			if (shapeModificationsButton != null)
-				shapeModificationsButton.onClick.AddListener(() => OnShowPanelButtonClick(shapeModificationsPanel));
-			additionalTexturesButton.onClick.AddListener(() => OnShowPanelButtonClick(additionalTexturesPanel));
 		}
 
 		/// <summary>
@@ -107,13 +54,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 
 		protected override IEnumerator ConfigureComputationParameters(PipelineType pipelineType, ComputationParameters computationParameters)
 		{
-			computationParameters.haircuts = new ComputationList(haircutsSelectingView.CurrentSelection);
-			computationParameters.blendshapes = new ComputationList(blendshapesSelectingView.CurrentSelection);
-			computationParameters.modelInfo = modelInfoParametersPanel.GetParameters();
-			computationParameters.avatarModifications = avatarModificationsParametersPanel.GetParameters();
-			if (shapeModificationsPanel != null)
-				computationParameters.shapeModifications = shapeModificationsParametersPanel.GetParameters();
-			computationParameters.additionalTextures = new ComputationList(additionalTexturesSelectingView.CurrentSelection);
+			parametersPanel.ConfigureComputationParameters(computationParameters);
 			yield break;
 		}
 
@@ -166,18 +107,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 		protected override void SetControlsInteractable(bool interactable)
 		{
 			base.SetControlsInteractable(interactable);
-
-			foreach (GameObject obj in panels)
-			{
-				foreach (Selectable c in obj.GetComponentsInChildren<Selectable>())
-				{
-					ControlEnabling controlEnabling = c.GetComponent<ControlEnabling>();
-					if (controlEnabling == null)
-						controlEnabling = c.gameObject.transform.parent.GetComponent<ControlEnabling>();
-					if (controlEnabling == null || controlEnabling.isEnabled)
-						c.interactable = interactable;
-				}
-			}
+			parametersPanel.SetControlsInteractable(interactable);
 		}
 
 		protected IEnumerator UpdateAvatarParameters()
@@ -196,39 +126,14 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 			if (allParametersRequest.IsError || defaultParametersRequest.IsError)
 			{
 				Debug.LogError("Unable to get parameters list");
-				haircutsSelectingView.InitItems(new List<string>());
-				blendshapesSelectingView.InitItems(new List<string>());
-				modelInfoParametersPanel.UpdateParameters(new ModelInfoGroup(), new ModelInfoGroup());
-				avatarModificationsParametersPanel.UpdateParameters(new AvatarModificationsGroup(), new AvatarModificationsGroup());
-				additionalTexturesSelectingView.InitItems(new List<string>());
-				if (shapeModificationsParametersPanel != null)
-					shapeModificationsParametersPanel.UpdateParameters(new ShapeModificationsGroup(), new ShapeModificationsGroup());
+				parametersPanel.UpdateParameters(null, null);
 			}
 			else
 			{
-				ComputationParameters allParameters = allParametersRequest.Result;
-				ComputationParameters defaultParameters = defaultParametersRequest.Result;
-
-				haircutsSelectingView.InitItems(allParameters.haircuts.FullNames, defaultParameters.haircuts.FullNames);
-				blendshapesSelectingView.InitItems(allParameters.blendshapes.FullNames, defaultParameters.blendshapes.FullNames);
-				modelInfoParametersPanel.UpdateParameters(allParameters.modelInfo, defaultParameters.modelInfo);
-				avatarModificationsParametersPanel.UpdateParameters(allParameters.avatarModifications, defaultParameters.avatarModifications);
-				additionalTexturesSelectingView.InitItems(allParameters.additionalTextures.FullNames, defaultParameters.additionalTextures.FullNames);
-				if (shapeModificationsParametersPanel != null)
-					shapeModificationsParametersPanel.UpdateParameters(allParameters.shapeModifications, defaultParameters.shapeModifications);
+				parametersPanel.UpdateParameters(allParametersRequest.Result, defaultParametersRequest.Result);
 			}
 
 			SetControlsInteractable(true);
-		}
-
-		protected void OnShowPanelButtonClick(GameObject activePanel)
-		{
-			foreach(GameObject panel in panels)
-			{
-				if (panel != activePanel)
-					panel.SetActive(false);
-			}
-			activePanel.SetActive(true);
 		}
 
 		protected override IEnumerator CheckAvailablePipelines()
@@ -240,11 +145,5 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 			if (cartoonishPipelineAvailabilityRequest.IsError)
 				yield break;
 		}
-
-		protected override void OnDestroy()
-		{
-			
-		}
-		#endregion
 	}
 }

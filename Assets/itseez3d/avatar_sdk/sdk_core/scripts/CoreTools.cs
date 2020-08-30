@@ -192,14 +192,9 @@ namespace ItSeez3D.AvatarSdk.Core
 		{
 			try
 			{
-				ModelInfo modelInfo = GetAvatarModelInfo(avatarCode);
-				if (modelInfo == null)
-					modelInfo = new ModelInfo();
-				modelInfo.PipelineType = pipelineType;
-
-				string jsonStr = JsonUtility.ToJson(modelInfo, true);
-				string modelInfoFile = AvatarSdkMgr.Storage().GetAvatarFilename(avatarCode, AvatarFile.MODEL_JSON);
-				File.WriteAllText(modelInfoFile, jsonStr);
+				string pipelineInfoFile = AvatarSdkMgr.Storage().GetAvatarFilename(avatarCode, AvatarFile.PIPELINE_INFO);
+				var traits = (PipelineTypeTraits)pipelineType;
+				File.WriteAllText(pipelineInfoFile, string.Format("{0}|{1}", traits.PipelineTypeName, traits.PipelineSubtypeName));
 			}
 			catch (Exception ex)
 			{
@@ -212,32 +207,36 @@ namespace ItSeez3D.AvatarSdk.Core
 
 		public static PipelineType LoadPipelineType(string avatarCode)
 		{
+			var avatarDirectory = AvatarSdkMgr.Storage().GetAvatarDirectory(avatarCode);
+			string filePath = Path.Combine(avatarDirectory, AvatarSdkMgr.Storage().AvatarFilenames[AvatarFile.PIPELINE_INFO]);
+
+			if (File.Exists(filePath))
+			{
+				try
+				{
+					string fileContent = File.ReadAllText(filePath);
+					string[] contentParts = fileContent.Split('|');
+					return PipelineTraitsFactory.Instance.GetTraitsFromPipelineName(contentParts[0], contentParts[1]).Type;
+				}
+				catch (Exception ex)
+				{
+					Debug.LogException(ex);
+				}
+			}
+
+			// Also the pipeline type can be retrieved from the model.json
 			ModelInfo modelInfo = GetAvatarModelInfo(avatarCode);
 			if (modelInfo != null)
 			{
-				PipelineType? pipelineType = modelInfo.PipelineType;
-				if (pipelineType.HasValue)
-					return pipelineType.Value;
+				if (!string.IsNullOrEmpty(modelInfo.pipeline) || string.IsNullOrEmpty(modelInfo.pipeline_subtype))
+				{
+					PipelineTypeTraits pipelineTraits = PipelineTraitsFactory.Instance.GetTraitsFromPipelineName(modelInfo.pipeline, modelInfo.pipeline_subtype);
+					if (pipelineTraits != null)
+						return pipelineTraits.Type;
+				}
 			}
 
-			// For avatars generated with previous versions of the plugin, pipeline type is stored in the PIPELINE_INFO file.
-			// To provide backward compatibility, need to check this file
-			var avatarDirectory = AvatarSdkMgr.Storage().GetAvatarDirectory(avatarCode);
-			string filePath = Path.Combine(avatarDirectory, AvatarSdkMgr.Storage().AvatarFilenames[AvatarFile.PIPELINE_INFO]);
-			try
-			{
-				if (File.Exists(filePath))
-				{
-					string fileContent = File.ReadAllText(filePath);
-					return PipelineTraitsFactory.Instance.GetTraitsFromPipelineName(fileContent).Type;
-				}
-				return PipelineTraitsFactory.GetDefaultPipelineType();
-			}
-			catch (Exception ex)
-			{
-				Debug.LogException(ex);
-				return PipelineTraitsFactory.GetDefaultPipelineType();
-			}
+			return PipelineTraitsFactory.GetDefaultPipelineType();
 		}
 
 		/// <summary>

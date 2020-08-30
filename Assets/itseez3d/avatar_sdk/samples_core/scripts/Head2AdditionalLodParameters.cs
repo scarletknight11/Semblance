@@ -20,8 +20,8 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 	{
 		public class Head2AdditionalLodParametersModel
 		{
-			public Size ModelTextureSize = null;
-			public Size HaircutTextureSize = null;
+			public TextureSize ModelTextureSize = null;
+			public TextureSize HaircutTextureSize = null;
 			public int? NumberOfFaces = null;
 
 			private bool ValidateInt(int val, int upperBound)
@@ -30,7 +30,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 				return false;
 			}
 
-			private bool ValidateSize(Size val, int upperBound)
+			private bool ValidateSize(TextureSize val, int upperBound)
 			{
 				if (val == null)
 				{
@@ -72,11 +72,11 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 				Head2AdditionalLodParametersModel result = new Head2AdditionalLodParametersModel();
 				int? modelW = ExtractValue(ModelTextureWidthInput);
 				int? modelH = ExtractValue(ModelTextureHeightInput);
-				if (modelW.HasValue && modelH.HasValue) { result.ModelTextureSize = new Size { width = modelW.Value, height = modelH.Value }; }
+				if (modelW.HasValue && modelH.HasValue) { result.ModelTextureSize = new TextureSize { width = modelW.Value, height = modelH.Value }; }
 
 				int? haircutW = ExtractValue(HaircutTextureWidthInput);
 				int? haircutH = ExtractValue(HaircutTextureHeightInput);
-				if (haircutW.HasValue && haircutH.HasValue) { result.HaircutTextureSize = new Size { width = haircutW.Value, height = haircutH.Value }; }
+				if (haircutW.HasValue && haircutH.HasValue) { result.HaircutTextureSize = new TextureSize { width = haircutW.Value, height = haircutH.Value }; }
 
 				result.NumberOfFaces = ExtractValue(FacesCountInput);
 				return result;

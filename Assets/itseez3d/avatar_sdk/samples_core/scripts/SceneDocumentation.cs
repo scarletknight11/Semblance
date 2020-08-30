@@ -32,7 +32,7 @@ namespace ItSeez3D.AvatarSdkSamples.Core
 			if (Application.isEditor) {
 				var sceneName = SceneManager.GetActiveScene().name;
 				Flavour flavour = Flavour.FLAVOUR_UNKNOWN;
-				if(sceneName.EndsWith("_cloud"))
+				if(sceneName.EndsWith("_cloud") || sceneName.Contains("webgl"))
 				{
 					flavour = Flavour.CLOUD;
 				}

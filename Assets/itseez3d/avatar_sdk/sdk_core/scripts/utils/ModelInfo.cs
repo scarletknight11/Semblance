@@ -106,30 +106,6 @@ namespace ItSeez3D.AvatarSdk.Core
 
 		public float[] facial_landmarks_68;
 
-		public PipelineType? PipelineType
-		{
-			get
-			{
-				if (string.IsNullOrEmpty(pipeline) || string.IsNullOrEmpty(pipeline_subtype))
-					return null;
-
-				PipelineTypeTraits pipelineTraits = PipelineTraitsFactory.Instance.GetTraitsFromPipelineName(pipeline, pipeline_subtype);
-				if (pipelineTraits == null)
-					return null;
-				return pipelineTraits.Type;
-			}
-
-			set
-			{
-				if (value.HasValue)
-				{
-					PipelineType pipelineType = value.Value;
-					var traits = (PipelineTypeTraits)pipelineType;
-					pipeline = traits.PipelineTypeName;
-					pipeline_subtype = traits.PipelineSubtypeName;
-				}
-			}
-		}
 
 		public AvatarAgeGroup AgeGroup
 		{

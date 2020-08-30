@@ -16,13 +16,14 @@ namespace ItSeez3D.AvatarSdk.Cloud.PipelineTraits
 		public Dictionary<PipelineType, PipelineTypeTraits> GetTraits()
 		{
 			var result = new Dictionary<PipelineType, PipelineTypeTraits>();
-			result.Add(PipelineType.BUST_2_0, new Bust2Traits());
-			result.Add(PipelineType.HEAD_2_0, new Head2Traits());
+			result.Add(PipelineType.HEAD_2_0_BUST_MOBILE, new Bust2Traits());
+			result.Add(PipelineType.HEAD_2_0_HEAD_MOBILE, new Head2Traits());
 			result.Add(PipelineType.FACE, new FaceTraits());
-			result.Add(PipelineType.HEAD, new HeadTraits());
+			result.Add(PipelineType.HEAD_1_2, new HeadTraits());
 			result.Add(PipelineType.STYLED_FACE, new StyledFaceTraits());
 			result.Add(PipelineType.UMA_MALE, new UmaMaleTraits());
 			result.Add(PipelineType.UMA_FEMALE, new UmaFemaleTraits());
+			result.Add(PipelineType.FULLBODY, new FullbodyTraits());
 			return result;
 		}
 	}
@@ -30,15 +31,15 @@ namespace ItSeez3D.AvatarSdk.Cloud.PipelineTraits
 	public class Head2Traits : Head2AbstractTraits
 	{
 		public sealed override string PipelineSubtypeName { get { return "head/mobile"; } }
-		public sealed override string DisplayName { get { return "Head 2.0"; } }
-		public sealed override PipelineType Type { get { return PipelineType.HEAD_2_0; } }
+		public sealed override string DisplayName { get { return "Head 2.0 | head/mobile"; } }
+		public sealed override PipelineType Type { get { return PipelineType.HEAD_2_0_HEAD_MOBILE; } }
 	}
 
 	public class Bust2Traits : Head2AbstractTraits
 	{
 		public sealed override string PipelineSubtypeName { get { return "bust/mobile"; } }
-		public sealed override string DisplayName { get { return "Bust 2.0"; } }
-		public sealed override PipelineType Type { get { return PipelineType.BUST_2_0; } }
+		public sealed override string DisplayName { get { return "Head 2.0 | bust/mobile"; } }
+		public sealed override PipelineType Type { get { return PipelineType.HEAD_2_0_BUST_MOBILE; } }
 	}
 
 	public class FaceTraits : PipelineTypeTraits
@@ -56,7 +57,7 @@ namespace ItSeez3D.AvatarSdk.Cloud.PipelineTraits
 		public override string PipelineSubtypeName { get { return "base/mobile"; } }
 		public override bool HaircutsSupported { get { return false; } }
 		public override string DisplayName { get { return "Head 1.2"; } }
-		public override PipelineType Type { get { return PipelineType.HEAD; } }
+		public override PipelineType Type { get { return PipelineType.HEAD_1_2; } }
 	}
 
 	public class StyledFaceTraits : PipelineTypeTraits
@@ -82,5 +83,13 @@ namespace ItSeez3D.AvatarSdk.Cloud.PipelineTraits
 		public sealed override string PipelineSubtypeName { get { return "uma2/female"; } }
 		public sealed override string DisplayName { get { return "UMA Female"; } }
 		public sealed override PipelineType Type { get { return PipelineType.UMA_FEMALE; } }
+	}
+
+	public class FullbodyTraits : Head2AbstractTraits
+	{
+		public sealed override string PipelineTypeName { get { return "body_0.1"; } }
+		public sealed override string PipelineSubtypeName { get { return "body/mobile"; } }
+		public sealed override string DisplayName { get { return "Fullbody"; } }
+		public sealed override PipelineType Type { get { return PipelineType.FULLBODY; } }
 	}
 }

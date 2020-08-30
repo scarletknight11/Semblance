@@ -50,5 +50,15 @@ namespace ItSeez3D.AvatarSdkSamples.Cloud
 		{
 			SceneManager.LoadScene(PluginStructure.GetScenePath(SampleScene.CLOUD_07_WEBGL));
 		}
+
+		public void RunFullbodyLegacySample()
+		{
+			SceneManager.LoadScene(PluginStructure.GetScenePath(SampleScene.CLOUD_08_FULLBODY_LEGACY));
+		}
+
+		public void RunMultiplayerSample()
+		{
+			SceneManager.LoadScene(PluginStructure.GetScenePath(SampleScene.CLOUD_09_MULTIPLAYER));
+		}
 	}
 }

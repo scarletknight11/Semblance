@@ -191,8 +191,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &13490801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,8 +209,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -332,6 +328,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: image_item (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: fallbackUrl
+      value: https://webdemo.avatarsdk.com/test_images/test_selfie_3.jpg
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: photoAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 31eb3b38a09be5f41a4b1f098382cb2e, type: 3}
     - target: {fileID: 224783188381079790, guid: 8ab67112e2a375a4bba75e6364679782,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -437,16 +443,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: fallbackUrl
-      value: https://webdemo.avatarsdk.com/test_images/test_selfie_3.jpg
-      objectReference: {fileID: 0}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: photoAsset
-      value: 
-      objectReference: {fileID: 4900000, guid: 31eb3b38a09be5f41a4b1f098382cb2e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
 --- !u!224 &132232863 stripped
@@ -492,8 +488,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -650,13 +644,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.UI.InputField+SubmitEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.InputField+OnChangeEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
@@ -682,8 +672,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -781,8 +769,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &231142031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,8 +787,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -888,8 +872,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 12
@@ -1006,6 +988,7 @@ RectTransform:
   - {fileID: 13490799}
   - {fileID: 793272783}
   - {fileID: 649826642}
+  - {fileID: 1222915432}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1069,8 +1052,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -1103,6 +1084,16 @@ PrefabInstance:
     - target: {fileID: 1721482916718398, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
       propertyPath: m_Name
       value: image_item (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: photoAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: cfed5e93d4bf8d747a98686e01dd4ef0, type: 3}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: fallbackUrl
+      value: https://webdemo.avatarsdk.com/test_images/test_selfie_8.jpg
       objectReference: {fileID: 0}
     - target: {fileID: 224783188381079790, guid: 8ab67112e2a375a4bba75e6364679782,
         type: 3}
@@ -1209,16 +1200,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: photoAsset
-      value: 
-      objectReference: {fileID: 4900000, guid: cfed5e93d4bf8d747a98686e01dd4ef0, type: 3}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: fallbackUrl
-      value: https://webdemo.avatarsdk.com/test_images/test_selfie_8.jpg
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
 --- !u!224 &441225343 stripped
@@ -1317,8 +1298,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &447241751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1337,8 +1316,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -1422,6 +1399,16 @@ PrefabInstance:
     - target: {fileID: 1721482916718398, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
       propertyPath: m_Name
       value: image_item
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: photoAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 63e89c8545cd8fd48a0415fc1d74ba5b, type: 3}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: fallbackUrl
+      value: https://webdemo.avatarsdk.com/test_images/test_selfie_1.jpg
       objectReference: {fileID: 0}
     - target: {fileID: 224783188381079790, guid: 8ab67112e2a375a4bba75e6364679782,
         type: 3}
@@ -1528,16 +1515,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: photoAsset
-      value: 
-      objectReference: {fileID: 4900000, guid: 34d2449f41d42c4479f66b8e10bafb7c, type: 3}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: fallbackUrl
-      value: https://webdemo.avatarsdk.com/test_images/test_selfie_ilya.jpg
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
 --- !u!224 &486310898 stripped
@@ -1580,6 +1557,16 @@ PrefabInstance:
     - target: {fileID: 1721482916718398, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
       propertyPath: m_Name
       value: image_item (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: photoAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 03ed269bf32ab744cb0256664b174ea3, type: 3}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: fallbackUrl
+      value: https://webdemo.avatarsdk.com/test_images/test_selfie_7.jpg
       objectReference: {fileID: 0}
     - target: {fileID: 224783188381079790, guid: 8ab67112e2a375a4bba75e6364679782,
         type: 3}
@@ -1686,16 +1673,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: photoAsset
-      value: 
-      objectReference: {fileID: 4900000, guid: 03ed269bf32ab744cb0256664b174ea3, type: 3}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: fallbackUrl
-      value: https://webdemo.avatarsdk.com/test_images/test_selfie_7.jpg
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
 --- !u!224 &636538256 stripped
@@ -1743,7 +1720,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1, y: -30}
+  m_AnchoredPosition: {x: -1, y: -15}
   m_SizeDelta: {x: 450, y: 500}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &649826644
@@ -1764,8 +1741,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -1838,8 +1813,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -1872,6 +1845,16 @@ PrefabInstance:
     - target: {fileID: 1721482916718398, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
       propertyPath: m_Name
       value: image_item (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: photoAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: b3a7fe85542aa99469b5f8c4314a01a6, type: 3}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: fallbackUrl
+      value: https://webdemo.avatarsdk.com/test_images/test_selfie_4.jpg
       objectReference: {fileID: 0}
     - target: {fileID: 224783188381079790, guid: 8ab67112e2a375a4bba75e6364679782,
         type: 3}
@@ -1977,16 +1960,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: photoAsset
-      value: 
-      objectReference: {fileID: 4900000, guid: b3a7fe85542aa99469b5f8c4314a01a6, type: 3}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: fallbackUrl
-      value: https://webdemo.avatarsdk.com/test_images/test_selfie_4.jpg
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
@@ -2111,8 +2084,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &719763528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2131,8 +2102,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -2205,8 +2174,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 12
@@ -2240,6 +2207,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: image_item (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: fallbackUrl
+      value: https://webdemo.avatarsdk.com/test_images/test_selfie_5.jpg
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: photoAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 9fac1451f3073914387b3c5515ea9429, type: 3}
     - target: {fileID: 224783188381079790, guid: 8ab67112e2a375a4bba75e6364679782,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2345,16 +2322,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: fallbackUrl
-      value: https://webdemo.avatarsdk.com/test_images/test_selfie_5.jpg
-      objectReference: {fileID: 0}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: photoAsset
-      value: 
-      objectReference: {fileID: 4900000, guid: 9fac1451f3073914387b3c5515ea9429, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
 --- !u!224 &778148327 stripped
@@ -2426,8 +2393,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
@@ -2474,7 +2439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1, y: -30}
+  m_AnchoredPosition: {x: 1, y: -15}
   m_SizeDelta: {x: 450, y: 500}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &793272784
@@ -2518,8 +2483,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -2727,8 +2690,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 16
@@ -2806,8 +2767,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -2830,6 +2789,130 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050546677}
   m_CullTransparentMesh: 0
+--- !u!1001 &1222915431
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 421674787}
+    m_Modifications:
+    - target: {fileID: 1991457891326020, guid: ad8a6b7dcda0a9c41a9d5d950fa28060, type: 3}
+      propertyPath: m_Name
+      value: SCENE_DOCUMENTATION
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad8a6b7dcda0a9c41a9d5d950fa28060, type: 3}
+--- !u!224 &1222915432 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224517648675705044, guid: ad8a6b7dcda0a9c41a9d5d950fa28060,
+    type: 3}
+  m_PrefabInstance: {fileID: 1222915431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1272215160
 GameObject:
   m_ObjectHideFlags: 0
@@ -2885,8 +2968,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 12
@@ -2926,6 +3007,26 @@ PrefabInstance:
     - target: {fileID: 1721482916718398, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
       propertyPath: m_Name
       value: image_item (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114560605995408978, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114560605995408978, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: photoAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 1e43cdb65fe07c04fbe8f4af6212bd97, type: 3}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: fallbackUrl
+      value: https://webdemo.avatarsdk.com/test_images/test_selfie_6.jpg
       objectReference: {fileID: 0}
     - target: {fileID: 224783188381079790, guid: 8ab67112e2a375a4bba75e6364679782,
         type: 3}
@@ -3032,26 +3133,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: photoAsset
-      value: 
-      objectReference: {fileID: 4900000, guid: 1e43cdb65fe07c04fbe8f4af6212bd97, type: 3}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: fallbackUrl
-      value: https://webdemo.avatarsdk.com/test_images/test_selfie_6.jpg
-      objectReference: {fileID: 0}
-    - target: {fileID: 114560605995408978, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114560605995408978, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
 --- !u!224 &1288140803 stripped
@@ -3150,8 +3231,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &1304663521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3170,8 +3249,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -3226,8 +3303,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -3293,6 +3368,16 @@ PrefabInstance:
     - target: {fileID: 1721482916718398, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
       propertyPath: m_Name
       value: image_item (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: photoAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: a30b4ea4d47b6ec42bf5008f9ba3edcd, type: 3}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: fallbackUrl
+      value: https://webdemo.avatarsdk.com/test_images/test_selfie_9.jpg
       objectReference: {fileID: 0}
     - target: {fileID: 224783188381079790, guid: 8ab67112e2a375a4bba75e6364679782,
         type: 3}
@@ -3399,16 +3484,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: photoAsset
-      value: 
-      objectReference: {fileID: 4900000, guid: d6fb91c4943bad042aa285ca49027e40, type: 3}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: fallbackUrl
-      value: https://webdemo.avatarsdk.com/test_images/test_selfie_roman.jpg
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
 --- !u!224 &1520250794 stripped
@@ -3472,8 +3547,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 18
@@ -3622,8 +3695,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -3701,8 +3772,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -3814,6 +3883,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: image_item (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 114560605995408978, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114560605995408978, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: fallbackUrl
+      value: https://webdemo.avatarsdk.com/test_images/test_selfie_2.jpg
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
+        type: 3}
+      propertyPath: photoAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 37fb7dc9c2c056846ae78612f6bd13b0, type: 3}
     - target: {fileID: 224783188381079790, guid: 8ab67112e2a375a4bba75e6364679782,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3919,26 +4008,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: fallbackUrl
-      value: https://webdemo.avatarsdk.com/test_images/test_selfie_2.jpg
-      objectReference: {fileID: 0}
-    - target: {fileID: 114709368219632164, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: photoAsset
-      value: 
-      objectReference: {fileID: 4900000, guid: 37fb7dc9c2c056846ae78612f6bd13b0, type: 3}
-    - target: {fileID: 114560605995408978, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114560605995408978, guid: 8ab67112e2a375a4bba75e6364679782,
-        type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ab67112e2a375a4bba75e6364679782, type: 3}
 --- !u!224 &1961456873 stripped
@@ -4002,8 +4071,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 28
@@ -4081,8 +4148,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 16

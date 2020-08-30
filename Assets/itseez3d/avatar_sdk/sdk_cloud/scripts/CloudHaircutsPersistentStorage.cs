@@ -31,9 +31,19 @@ namespace ItSeez3D.AvatarSdk.Cloud
 			result.ShortId = CoreTools.GetShortHaircutId(haircutId);
 			result.FullId = haircutId;
 
-			bool commonHaircutsOnly = avatarCode == null;
 			//pointclouds needeed for common haircuts
-			bool haircutWithPointcloud = commonHaircutsOnly || PipelineTraitsFactory.Instance.GetTraitsFromAvatarCode(avatarCode).IsPointcloudApplicableToHaircut(haircutId);
+			bool haircutWithPointcloud = true;
+			if (!string.IsNullOrEmpty(avatarCode))
+			{
+				PipelineTypeTraits pipelineTraits = PipelineTraitsFactory.Instance.GetTraitsFromAvatarCode(avatarCode);
+				if (pipelineTraits.Type == PipelineType.FULLBODY)
+				{
+					SetMetadataForFullbodyHaircut(result, avatarCode, pipelineTraits.IsPointcloudApplicableToHaircut(haircutId));
+					return result;
+				}
+
+				haircutWithPointcloud = pipelineTraits.IsPointcloudApplicableToHaircut(haircutId);
+			}
 
 			string avatarHaircutsDirectory = "";
 			if (avatarCode != null)
@@ -72,6 +82,17 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		public void SetPersistentStorage(IPersistentStorage storage)
 		{
 			persistentStorage = storage;
+		}
+
+		private void SetMetadataForFullbodyHaircut(HaircutMetadata haircutMetadata, string avatarCode, bool isCommonHaircut)
+		{
+			string avatarHaircutsDirectory = Path.Combine(persistentStorage.GetAvatarDirectory(avatarCode), "haircuts");
+			haircutMetadata.Texture = Path.Combine(avatarHaircutsDirectory, string.Format("{0}.png", haircutMetadata.ShortId));
+			if (isCommonHaircut)
+			{
+				haircutMetadata.CommonTexture = Path.Combine(GetCommonHaircutsDirectory(), string.Format("{0}.png", haircutMetadata.FullId));
+				haircutMetadata.Preview = Path.Combine(GetCommonHaircutsDirectory(), string.Format("{0}_preview.png", haircutMetadata.FullId));
+			}
 		}
 	}
 }

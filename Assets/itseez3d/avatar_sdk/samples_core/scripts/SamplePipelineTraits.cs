@@ -36,7 +36,7 @@ namespace ItSeez3D.AvatarSdkSamples.SamplePipelineTraits
 	public class SampleHead2Traits : SampleHead2AbstractTraits
 	{
 		public override bool isCompatibleWithFullBody { get { return true; } }
-		public override PipelineType Type { get { return PipelineType.HEAD_2_0; } }
+		public override PipelineType Type { get { return PipelineType.HEAD_2_0_HEAD_MOBILE; } }
 		public override Vector3 ViewerDisplayScale { get { return new Vector3(9, 9, 9); } }
 		public override Vector3 ViewerLocalPosition { get { return new Vector3(0.0f, 0.5f, 0.0f); } }
 		public override Vector3 GettingStartedSampleDisplayScale { get { return new Vector3(0.9f, 0.9f, 0.9f); } }
@@ -45,7 +45,7 @@ namespace ItSeez3D.AvatarSdkSamples.SamplePipelineTraits
 
 	public class SampleBust2Traits : SampleHead2AbstractTraits
 	{
-		public override PipelineType Type { get { return PipelineType.BUST_2_0; } }
+		public override PipelineType Type { get { return PipelineType.HEAD_2_0_BUST_MOBILE; } }
 		public override Vector3 ViewerDisplayScale { get { return new Vector3(7, 7, 7); } }
 		public override Vector3 GettingStartedSampleDisplayScale { get { return new Vector3(0.8f, 0.8f, 0.8f); } }
 		public override Vector3 GettingStartedSampleLocalPosition { get { return new Vector3(0.0f, -0.02f, 0.0f); } }
@@ -65,6 +65,13 @@ namespace ItSeez3D.AvatarSdkSamples.SamplePipelineTraits
 		public override Vector3 ViewerLocalPosition { get { return new Vector3(0.0f, -8.5f, 0.0f); } }
 	}
 
+	public class SampleFullbodyTraits : SampleHead2AbstractTraits
+	{
+		public override PipelineType Type { get { return PipelineType.FULLBODY; } }
+		public override Vector3 ViewerDisplayScale { get { return new Vector3(5, 5, 5); } }
+		public override Vector3 ViewerLocalPosition { get { return new Vector3(0.0f, -8.5f, 0.0f); } }
+	}
+
 	public class SampleFaceTraits : PipelineTypeSampleTraits
 	{
 		public override bool isCompatibleWithFullBody { get { return true; } }
@@ -77,7 +84,7 @@ namespace ItSeez3D.AvatarSdkSamples.SamplePipelineTraits
 	public class SampleHeadTraits : PipelineTypeSampleTraits
 	{
 		public override bool HaircutsSupported { get { return false; } }
-		public override PipelineType Type { get { return PipelineType.HEAD; } }
+		public override PipelineType Type { get { return PipelineType.HEAD_1_2; } }
 		public override Vector3 ViewerDisplayScale { get { return new Vector3(7, 7, 7); } }
 		public override Vector3 ViewerLocalPosition { get { return new Vector3(0.0f, -0.3f, 0.0f); } }
 		public override Vector3 GettingStartedSampleDisplayScale { get { return new Vector3(0.8f, 0.8f, 0.8f); } }
@@ -162,13 +169,14 @@ namespace ItSeez3D.AvatarSdkSamples.SamplePipelineTraits
 				{
 					traits = new TraitsFactory<PipelineTypeSampleTraits>();
 					traits.TraitsDictionary = new Dictionary<PipelineType, PipelineTypeSampleTraits>();
-					traits.TraitsDictionary.Add(PipelineType.BUST_2_0, new SampleBust2Traits());
-					traits.TraitsDictionary.Add(PipelineType.HEAD_2_0, new SampleHead2Traits());
+					traits.TraitsDictionary.Add(PipelineType.HEAD_2_0_BUST_MOBILE, new SampleBust2Traits());
+					traits.TraitsDictionary.Add(PipelineType.HEAD_2_0_HEAD_MOBILE, new SampleHead2Traits());
 					traits.TraitsDictionary.Add(PipelineType.FACE, new SampleFaceTraits());
-					traits.TraitsDictionary.Add(PipelineType.HEAD, new SampleHeadTraits());
+					traits.TraitsDictionary.Add(PipelineType.HEAD_1_2, new SampleHeadTraits());
 					traits.TraitsDictionary.Add(PipelineType.STYLED_FACE, new SampleStyledFaceTraits());
 					traits.TraitsDictionary.Add(PipelineType.UMA_MALE, new SampleUmaMaleTraits());
 					traits.TraitsDictionary.Add(PipelineType.UMA_FEMALE, new SampleUmaFemaleTraits());
+					traits.TraitsDictionary.Add(PipelineType.FULLBODY, new SampleFullbodyTraits());
 				}
 				return traits;
 			}

@@ -16,6 +16,12 @@ using UnityEngine;
 
 namespace ItSeez3D.AvatarSdk.Core
 {
+	public class TextureSize
+	{
+		public int width;
+		public int height;
+	}
+
 	/// <summary>
 	/// Base class represents the computation property
 	/// </summary>
@@ -32,7 +38,7 @@ namespace ItSeez3D.AvatarSdk.Core
 		public string Name { get; set; }
 
 		/// <summary>
-		/// True if this property is available and can be set
+		/// Pipeline's property availability. Set when the parameters are parsed from the JSON.
 		/// </summary>
 		public bool IsAvailable { get; set; }
 
@@ -75,12 +81,6 @@ namespace ItSeez3D.AvatarSdk.Core
 		}
 	}
 
-	public class Size
-	{
-		public int width;
-		public int height;
-	}
-
 	/// <summary>
 	/// Generic avatar calculation property
 	/// </summary>
@@ -89,8 +89,8 @@ namespace ItSeez3D.AvatarSdk.Core
 		public ComputationProperty(string name)
 		{
 			Name = name;
-			IsAvailable = false;
 			HasValue = false;
+			IsAvailable = true;
 		}
 
 		public ComputationProperty(string groupName, string name) : this(name)
@@ -123,12 +123,18 @@ namespace ItSeez3D.AvatarSdk.Core
 				node["green"] = (int)(color.g * 255);
 				node["blue"] = (int)(color.b * 255);
 			}
-			else if (typeof(T) == typeof(Size))
+			else if (typeof(T) == typeof(TextureSize))
 			{
-				Size size = (Size)Convert.ChangeType(value, typeof(Size));
+				TextureSize size = (TextureSize)Convert.ChangeType(value, typeof(TextureSize));
 				node = new JSONObject();
 				node["width"] = size.width;
 				node["height"] = size.height;
+			}
+			else if (typeof(T) == typeof(AvatarGender))
+			{
+				AvatarGender gender = (AvatarGender)Convert.ChangeType(value, typeof(AvatarGender));
+				if (gender != AvatarGender.Unknown)
+					node = new JSONString(gender == AvatarGender.Male ? "male" : "female");
 			}
 			else if (typeof(T) == typeof(float))
 				node = new JSONNumber((float)Convert.ChangeType(value, typeof(float)));

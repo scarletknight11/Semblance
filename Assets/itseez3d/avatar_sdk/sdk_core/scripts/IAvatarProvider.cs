@@ -53,14 +53,15 @@ namespace ItSeez3D.AvatarSdk.Core
 		/// <summary>
 		/// Moves files from the server to local storage if it is required.
 		/// </summary>
-		AsyncRequest MoveAvatarModelToLocalStorageAsync(string avatarCode, bool withHaircutPointClouds, bool withBlendshapes);
+		AsyncRequest MoveAvatarModelToLocalStorageAsync(string avatarCode, bool withHaircutPointClouds, bool withBlendshapes, MeshFormat format = MeshFormat.PLY);
 
 		/// <summary>
 		/// Makes TexturedMesh with generated head.
 		/// </summary>
 		/// <param name="detailsLevel">Level of mesh details in range [0..3]</param>
 		/// <param name="additionalTextureName">Name of the texture that should be applied intead of default</param>
-		AsyncRequest<TexturedMesh> GetHeadMeshAsync(string avatarCode, bool withBlendshapes, int detailsLevel = 0, string additionalTextureName = null);
+		AsyncRequest<TexturedMesh> GetHeadMeshAsync(string avatarCode, bool withBlendshapes, int detailsLevel = 0, MeshFormat format = MeshFormat.PLY, 
+			string additionalTextureName = null);
 
 		/// <summary>
 		/// Returns avatar texture by name or standard texture if name isn't specified.

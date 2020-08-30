@@ -49,17 +49,20 @@ namespace ItSeez3D.AvatarSdk.Core
 				if (haircutsRootNode != null)
 					computationParams.haircuts = new ComputationList(haircutsRootNode);
 
+				computationParams.avatarModifications.SetPropertiesToUnavailableState();
 				var avatarModificationsNode = FindNodeByName(rootNode, AVATAR_MODIFICATIONS);
 				if (avatarModificationsNode != null)
-					computationParams.avatarModifications = new AvatarModificationsGroup(avatarModificationsNode);
+					computationParams.avatarModifications.FromJson(avatarModificationsNode);
 
+				computationParams.modelInfo.SetPropertiesToUnavailableState();
 				var modelInfoNode = FindNodeByName(rootNode, MODEL_INFO);
 				if (modelInfoNode != null)
-					computationParams.modelInfo = new ModelInfoGroup(modelInfoNode);
+					computationParams.modelInfo.FromJson(modelInfoNode);
 
+				computationParams.shapeModifications.SetPropertiesToUnavailableState();
 				var shapeModificationsNode = FindNodeByName(rootNode, SHAPE_MODIFICATIONS);
 				if (shapeModificationsNode != null)
-					computationParams.shapeModifications = new ShapeModificationsGroup(shapeModificationsNode);
+					computationParams.shapeModifications.FromJson(shapeModificationsNode);
 
 				var additionalTexturesNode = FindNodeByName(rootNode, ADDITIONAL_TEXTURES);
 				if (additionalTexturesNode != null)

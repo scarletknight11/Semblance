@@ -21,7 +21,7 @@ Shader "Avatar SDK/HaircutSolidLitShader"
 
     SubShader
     {
-        Tags {"Queue" = "Transparent" "RenderType" = "TransparentCutout" "IgnoreProjector" = "True"}
+        Tags {"RenderType" = "TransparentCutout" "IgnoreProjector" = "True"}
         
         Pass
         {

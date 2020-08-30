@@ -68,5 +68,11 @@ namespace ItSeez3D.AvatarSdk.Core
 			string fileName = Path.GetFileName(filePath);
 			File.Copy(filePath, Path.Combine(toDirPath, fileName));
 		}
+
+		public static void CreateDirectoryIfNotExist(string dir)
+		{
+			if (!Directory.Exists(dir))
+				Directory.CreateDirectory(dir);
+		}
 	}
 }

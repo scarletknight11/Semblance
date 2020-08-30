@@ -25,7 +25,7 @@ namespace ItSeez3D.AvatarSdk.Core
 					{
 						UpdateCheckMemo = "avatar_sdk_last_update_check_cloud",
 						UpdateCheckUrl = "https://releases.avatarsdk.com/unity-plugin/version_cloud.txt",
-						Version = new Version(2, 1, 1),
+						Version = new Version(2, 2, 1),
 						Name = "Avatar SDK Cloud"
 					}
 			},

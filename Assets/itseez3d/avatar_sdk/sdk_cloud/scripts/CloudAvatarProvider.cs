@@ -99,10 +99,10 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		/// <param name="withHaircutPointClouds">If True, haircut point clouds will be downloaded.</param>
 		/// <param name="withBlendshapes">If true, blendshapes will be downloaded.</param>
 		/// <returns></returns>
-		public AsyncRequest MoveAvatarModelToLocalStorageAsync(string avatarCode, bool withHaircutPointClouds, bool withBlendshapes)
+		public AsyncRequest MoveAvatarModelToLocalStorageAsync(string avatarCode, bool withHaircutPointClouds, bool withBlendshapes, MeshFormat format = MeshFormat.PLY)
 		{
 			var request = new AsyncRequest<AvatarData>(AvatarSdkMgr.Str(Strings.DownloadingAvatar));
-			AvatarSdkMgr.SpawnCoroutine(MoveAvatarModelToLocalStorage(avatarCode, withHaircutPointClouds, withBlendshapes, request));
+			AvatarSdkMgr.SpawnCoroutine(MoveAvatarModelToLocalStorage(avatarCode, withHaircutPointClouds, withBlendshapes, format, request));
 			return request;
 		}
 
@@ -113,10 +113,11 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		/// <param name="avatarCode">code of the loaded avatar</param>
 		/// <param name="withBlendshapes">blendshapes will be added to mesh</param>
 		/// <param name="additionalTextureName">Name of the texture that should be applied intead of default</param>
-		public AsyncRequest<TexturedMesh> GetHeadMeshAsync(string avatarCode, bool withBlendshapes, int detailsLevel = 0, string additionalTextureName = null)
+		public AsyncRequest<TexturedMesh> GetHeadMeshAsync(string avatarCode, bool withBlendshapes, int detailsLevel = 0, MeshFormat format = MeshFormat.PLY,
+			string additionalTextureName = null)
 		{
 			var request = new AsyncRequest<TexturedMesh>(AvatarSdkMgr.Str(Strings.LoadingHeadMesh));
-			AvatarSdkMgr.SpawnCoroutine(GetHeadMeshFunc(avatarCode, withBlendshapes, detailsLevel, additionalTextureName, request));
+			AvatarSdkMgr.SpawnCoroutine(GetHeadMeshFunc(avatarCode, withBlendshapes, detailsLevel, format, additionalTextureName, request));
 			return request;
 		}
 
@@ -262,20 +263,21 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		/// <param name="avatar">Avatar to download.</param>
 		/// <param name="withHaircutPointClouds">If set to true, download all haircut point clouds too.</param>
 		/// <param name="withBlendshapes">If set to true, download blendshapes too.</param>
-		public AsyncRequest DownloadAndSaveAvatarModelAsync(AvatarData avatar, bool withHaircutPointClouds, bool withBlendshapes, int detailsLevel = 0)
+		public AsyncRequest DownloadAndSaveAvatarModelAsync(AvatarData avatar, bool withHaircutPointClouds, bool withBlendshapes, int detailsLevel = 0, 
+			MeshFormat format = MeshFormat.PLY)
 		{
 			var request = new AsyncRequest<AvatarData>(AvatarSdkMgr.Str(Strings.DownloadingAvatar));
-			AvatarSdkMgr.SpawnCoroutine(DownloadAndSaveAvatarModel(avatar, withHaircutPointClouds, withBlendshapes, detailsLevel, request));
+			AvatarSdkMgr.SpawnCoroutine(DownloadAndSaveAvatarModel(avatar, withHaircutPointClouds, withBlendshapes, detailsLevel, format, request));
 			return request;
 		}
 
 		/// <summary>
 		/// Download avatar mesh, unzip and save to disk.
 		/// </summary>
-		public AsyncRequest DownloadAndSaveMeshAsync(AvatarData avatarData, int detailsLevel = 0)
+		public AsyncRequest DownloadAndSaveMeshAsync(AvatarData avatarData, int detailsLevel = 0, MeshFormat meshFormat = MeshFormat.PLY)
 		{
 			var request = new AsyncRequest<AvatarData>(AvatarSdkMgr.Str(Strings.GettingHeadMesh));
-			AvatarSdkMgr.SpawnCoroutine(DownloadAndSaveMeshFunc(avatarData, detailsLevel, request));
+			AvatarSdkMgr.SpawnCoroutine(DownloadAndSaveMeshFunc(avatarData, detailsLevel, meshFormat, request));
 			return request;
 		}
 
@@ -287,7 +289,7 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		public AsyncRequest DownloadAndSaveTextureAsync(AvatarData avatarData, string textureName = null)
 		{
 			var request = new AsyncRequest<AvatarData>(AvatarSdkMgr.Str(Strings.GettingTexture));
-			AvatarSdkMgr.SpawnCoroutine(DownloadAndSaveTextureFunc(avatarData, textureName, request));
+			AvatarSdkMgr.SpawnCoroutine(DownloadAndSaveTextureFunc(avatarData, textureName, null, request));
 			return request;
 		}
 
@@ -340,6 +342,13 @@ namespace ItSeez3D.AvatarSdk.Cloud
 			return request;
 		}
 
+		public AsyncRequest DownloadAndSaveAllFullbodyHaircutsTexturesAsync(string avatarCode)
+		{
+			var request = new AsyncRequest(AvatarSdkMgr.Str(Strings.DownloadingAllHaircutsTextures));
+			AvatarSdkMgr.SpawnCoroutine(DownloadAndSaveAllFullbodyHaircutsTexturesFunc(avatarCode, request));
+			return request;
+		}
+
 		/// <summary>
 		/// Download haircut mesh and texture and save them to disk
 		/// </summary>
@@ -381,6 +390,20 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		{
 			var blendshapesDir = AvatarSdkMgr.Storage().GetAvatarSubdirectory(avatarCode, AvatarSubdirectory.BLENDSHAPES, levelOfDetails);
 			return CoreTools.UnzipFileAsync(blendshapesZip, blendshapesDir);
+		}
+
+		public virtual AsyncRequest DownloadModelInfoAsync(string avatarCode)
+		{
+			var request = new AsyncRequest(AvatarSdkMgr.Str(Strings.GettingModelInfo));
+			AvatarSdkMgr.SpawnCoroutine(DownloadModelInfoFunc(avatarCode, request));
+			return request;
+		}
+
+		public AsyncRequest DownloadFullbodyAvatarDataAsync(string avatarCode, MeshFormat format)
+		{
+			var request = new AsyncRequest<AvatarData>(AvatarSdkMgr.Str(Strings.DownloadingAvatar));
+			AvatarSdkMgr.SpawnCoroutine(DownloadFullbodyAvatarDataFunc(avatarCode, format, request));
+			return request;
 		}
 		#endregion
 
@@ -462,7 +485,7 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		/// <summary>
 		/// MoveToLocalStorageAvatarModelAsync implementation
 		/// </summary>
-		private IEnumerator MoveAvatarModelToLocalStorage(string avatarCode, bool withHaircutPointClouds, bool withBlendshapes, AsyncRequest request)
+		private IEnumerator MoveAvatarModelToLocalStorage(string avatarCode, bool withHaircutPointClouds, bool withBlendshapes, MeshFormat format, AsyncRequest request)
 		{
 			var avatarRequest = GetAvatarAsync(avatarCode);
 			yield return avatarRequest.Await();
@@ -472,10 +495,10 @@ namespace ItSeez3D.AvatarSdk.Cloud
 				yield break;
 			}
 
-			yield return DownloadAndSaveAvatarModel(avatarRequest.Result, withHaircutPointClouds, withBlendshapes, 0, request);
+			yield return DownloadAndSaveAvatarModel(avatarRequest.Result, withHaircutPointClouds, withBlendshapes, 0, format, request);
 		}
 
-		public virtual IEnumerator DownloadModelInfoFunc(string avatarCode, AsyncRequest request)
+		private IEnumerator DownloadModelInfoFunc(string avatarCode, AsyncRequest request)
 		{
 			var modelInfoRequest = Connection.GetModelInfoAsync(avatarCode);
 			yield return modelInfoRequest.Await();
@@ -490,20 +513,14 @@ namespace ItSeez3D.AvatarSdk.Cloud
 			request.IsDone = true;
 		}
 
-		public virtual AsyncRequest DownloadModelInfoAsync(string avatarCode)
-		{
-			var request = new AsyncRequest(AvatarSdkMgr.Str(Strings.GettingModelInfo));
-			AvatarSdkMgr.SpawnCoroutine(DownloadModelInfoFunc(avatarCode, request));
-			return request;
-		}
-
 		/// <summary>
 		/// DownloadAndSaveAvatarModelAsync implementation.
 		/// </summary>
-		private IEnumerator DownloadAndSaveAvatarModel(AvatarData avatar, bool withHaircutPointClouds, bool withBlendshapes, int detailsLevel, AsyncRequest request)
+		private IEnumerator DownloadAndSaveAvatarModel(AvatarData avatar, bool withHaircutPointClouds, bool withBlendshapes, int detailsLevel, 
+			MeshFormat meshFormat, AsyncRequest request)
 		{
 			List<AsyncRequest> requests = new List<AsyncRequest>();
-			requests.Add(DownloadAndSaveMeshAsync(avatar, detailsLevel));
+			requests.Add(DownloadAndSaveMeshAsync(avatar, detailsLevel, meshFormat));
 			requests.Add(DownloadAndSaveTextureAsync(avatar));
 			requests.Add(DownloadModelInfoAsync(avatar.code));
 			if (withHaircutPointClouds)
@@ -681,6 +698,55 @@ namespace ItSeez3D.AvatarSdk.Cloud
 			request.IsDone = true;
 		}
 
+		private IEnumerator DownloadAndSaveAllFullbodyHaircutsTexturesFunc(string avatarCode, AsyncRequest request)
+		{
+			var haircutsListRequest = GetHaircutsIdAsync(avatarCode);
+			yield return request.AwaitSubrequest(haircutsListRequest, 0.0f);
+			if (request.IsError)
+				yield break;
+
+			string[] availableHaircuts = haircutsListRequest.Result;
+			if (availableHaircuts != null)
+			{
+				for (int i = 0; i < availableHaircuts.Length; i++)
+				{
+					string haircutId = availableHaircuts[i];
+					var haircutMetadata = HaircutsPersistentStorage.Instance.GetHaircutMetadata(haircutId, avatarCode);
+
+					//Haircuts textures (except for generated) are the same for all avatars. So it is not necessary to download them each time.
+					//These textures are stored in the common directory and copied for each avatar.
+					string textureFilePath = string.IsNullOrEmpty(haircutMetadata.CommonTexture) ? haircutMetadata.Texture : haircutMetadata.CommonTexture;
+					if (!File.Exists(textureFilePath))
+					{
+						var haircutDataRequest = GetHaircutDataAsync(avatarCode, haircutId);
+						yield return request.AwaitSubrequest(haircutDataRequest, request.Progress);
+						if (request.IsError)
+							yield break;
+
+						var haircutTextureRequest = connection.DownloadHaircutTextureBytesAsync(haircutDataRequest.Result);
+						yield return request.AwaitSubrequest(haircutTextureRequest, request.Progress);
+						if (request.IsError)
+							yield break;
+
+						var saveHaircutTextureRequest = CoreTools.SaveHaircutFileAsync(haircutTextureRequest.Result, textureFilePath);
+						yield return request.AwaitSubrequest(saveHaircutTextureRequest, request.Progress);
+						if (request.IsError)
+							yield break;
+					}
+
+					if (haircutMetadata.Texture != textureFilePath)
+					{
+						IOUtils.CreateDirectoryIfNotExist(Path.GetDirectoryName(haircutMetadata.Texture));
+						File.Copy(textureFilePath, haircutMetadata.Texture);
+					}
+
+					request.Progress = (i + 1.0f) / availableHaircuts.Length;
+				}
+			}
+
+			request.IsDone = true;
+		}
+
 		/// <summary>
 		/// DownloadAndSaveHaircutMeshAsync implementation
 		/// </summary>
@@ -806,7 +872,8 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		/// <summary>
 		/// GetHeadMeshAsync implementation
 		/// </summary>
-		private IEnumerator GetHeadMeshFunc(string avatarCode, bool withBlendshapes, int detailsLevel, string additionalTextureName, AsyncRequest<TexturedMesh> request)
+		private IEnumerator GetHeadMeshFunc(string avatarCode, bool withBlendshapes, int detailsLevel, MeshFormat meshFormat, 
+			string additionalTextureName, AsyncRequest<TexturedMesh> request)
 		{
 			string meshFilename = AvatarSdkMgr.Storage().GetAvatarFilename(avatarCode, AvatarFile.MESH_PLY, detailsLevel);
 			bool meshFileExists = File.Exists(meshFilename);
@@ -835,7 +902,7 @@ namespace ItSeez3D.AvatarSdk.Cloud
 
 				if (!meshFileExists)
 				{
-					var meshRequest = DownloadAndSaveMeshAsync(avatarData, detailsLevel);
+					var meshRequest = DownloadAndSaveMeshAsync(avatarData, detailsLevel, meshFormat);
 					yield return request.AwaitSubrequest(meshRequest, 0.3f);
 					if (request.IsError)
 						yield break;
@@ -907,9 +974,9 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		/// <summary>
 		/// DownloadAndSaveMeshAsync implementation
 		/// </summary>
-		private IEnumerator DownloadAndSaveMeshFunc(AvatarData avatarData, int detailsLevel, AsyncRequest request)
+		private IEnumerator DownloadAndSaveMeshFunc(AvatarData avatarData, int detailsLevel, MeshFormat format, AsyncRequest request)
 		{
-			var meshZip = connection.DownloadMeshZipAsync(avatarData, detailsLevel);
+			var meshZip = connection.DownloadMeshZipAsync(avatarData, detailsLevel, format);
 			yield return request.AwaitSubrequest(meshZip, 0.9f);
 			if (request.IsError)
 				yield break;
@@ -940,7 +1007,7 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		/// <summary>
 		/// DownloadAndSaveTextureAsync implementation
 		/// </summary>
-		protected IEnumerator DownloadAndSaveTextureFunc(AvatarData avatarData, string textureName, AsyncRequest request)
+		protected IEnumerator DownloadAndSaveTextureFunc(AvatarData avatarData, string textureName, string expectedTextureFilename, AsyncRequest request)
 		{
 			string textureFilename = null;
 			byte[] textureBytes = null;
@@ -963,7 +1030,10 @@ namespace ItSeez3D.AvatarSdk.Cloud
 					yield break;
 
 				textureBytes = textureRequest.Result.bytes;
-				textureFilename = Path.Combine(AvatarSdkMgr.Storage().GetAvatarDirectory(avatarData.code), textureRequest.Result.fileName);
+				if (!string.IsNullOrEmpty(expectedTextureFilename))
+					textureFilename = Path.Combine(AvatarSdkMgr.Storage().GetAvatarDirectory(avatarData.code), expectedTextureFilename);
+				else
+					textureFilename = Path.Combine(AvatarSdkMgr.Storage().GetAvatarDirectory(avatarData.code), textureRequest.Result.fileName);
 			}
 
 			var saveTextureRequest = CoreTools.SaveFileAsync(textureBytes, textureFilename);
@@ -1227,7 +1297,6 @@ namespace ItSeez3D.AvatarSdk.Cloud
 		/// </summary>
 		private IEnumerator ConvertToFullHaircutsIdFunc(List<string> shortHaircutsId, PipelineType pipeline, AsyncRequest<List<string>> request)
 		{
-
 			var parametersRequest = GetParametersAsync(ComputationParametersSubset.ALL, pipeline);
 			yield return request.AwaitSubrequest(parametersRequest, 0.9f);
 			if (request.IsError)
@@ -1247,6 +1316,34 @@ namespace ItSeez3D.AvatarSdk.Cloud
 				}
 			}
 			request.Result = fullHaircutsId;
+			request.IsDone = true;
+		}
+
+		private IEnumerator DownloadFullbodyAvatarDataFunc(string avatarCode, MeshFormat format, AsyncRequest request)
+		{
+			var avatarRequest = GetAvatarAsync(avatarCode);
+			yield return avatarRequest.Await();
+			if (avatarRequest.IsError)
+			{
+				request.SetError(avatarRequest.ErrorMessage);
+				yield break;
+			}
+
+			var downloadModelRequest = DownloadAndSaveAvatarModelAsync(avatarRequest.Result, false, false, 0, format);
+			yield return request.AwaitSubrequest(downloadModelRequest, 0.5f);
+			if (request.IsError)
+				yield break;
+
+			if (format == MeshFormat.GLTF)
+			{
+				// GLTF already contains haircuts meshes. We need to download textures for them.
+				// If other format is used, haircuts should be downloaded separately.
+				var haircutsTexturesRequest = DownloadAndSaveAllFullbodyHaircutsTexturesAsync(avatarCode);
+				yield return request.AwaitSubrequest(haircutsTexturesRequest, 1.0f);
+				if (request.IsError)
+					yield break;
+			}
+
 			request.IsDone = true;
 		}
 		#endregion

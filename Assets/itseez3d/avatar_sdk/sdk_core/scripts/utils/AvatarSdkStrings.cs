@@ -77,6 +77,8 @@ namespace ItSeez3D.AvatarSdk.Core
 
 		public static string DownloadingAllHaircuts { get { return "Downloading all available haircuts"; } }
 
+		public static string DownloadingAllHaircutsTextures { get { return "Downloading all haircuts textures"; } }
+
 		public static string DownloadingHaircutTexture { get { return "Downloading haircut texture"; } }
 
 		public static string DownloadingHaircutPointCloud { get { return "Downloading haircut points"; } }

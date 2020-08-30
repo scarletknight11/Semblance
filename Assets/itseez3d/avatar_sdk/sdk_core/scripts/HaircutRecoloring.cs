@@ -87,6 +87,18 @@ namespace ItSeez3D.AvatarSdk.Core
 			ResetTint();
 		}
 
+		public void ResetHaircutMaterial(Material haircutMaterial, Texture2D texture, Color defaultColor, Color currentColor)
+		{
+			this.defaultColor = defaultColor;
+			this.haircutMaterial = haircutMaterial;
+			if (texture != null)
+				averageColor = CoreTools.CalculateAverageColor(texture);
+
+			if (colorPicker != null)
+				colorPicker.Color = currentColor;
+			OnColorChange(currentColor);
+		}
+
 		public void ResetTint()
 		{
 			Color c = LineUpColor;
