@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Visual Avatar.unity
+- path: Assets/itseez3d/avatar_sdk/samples_cloud/03_fullbody_sample_cloud/scenes/08_fullbody_legacy_sample_cloud.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
